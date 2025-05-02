@@ -79,30 +79,43 @@
             font-size: 1em;
         }
 
-        .menu-container {
+        #menuContainer {
             margin-top: 20px;
             border-top: 1px solid #eee;
             padding-top: 20px;
         }
 
-        .menu-button {
+        .menu-button, .admin-unit-button {
             display: block;
             width: 100%;
             padding: 14px;
             margin-bottom: 10px;
             border: none;
             border-radius: 6px;
-            background-color: #007bff;
-            color: white;
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
             box-sizing: border-box;
             text-decoration: none;
+            text-align: center;
+        }
+
+        .menu-button {
+            background-color: #007bff;
+            color: white;
         }
 
         .menu-button:hover {
             background-color: #0056b3;
+        }
+
+        .admin-unit-button {
+            background-color: #6c757d; /* Warna abu-abu untuk pilihan unit admin */
+            color: white;
+        }
+
+        .admin-unit-button:hover {
+            background-color: #5a6268;
         }
 
         .coming-soon {
@@ -120,50 +133,44 @@
             display: none;
         }
 
-        .logout-button {
+        .logout-button, .kembali-button {
             display: block;
             width: 100%;
             padding: 14px;
             margin-top: 10px;
             border: none;
             border-radius: 6px;
-            background-color: #dc3545; /* Warna merah untuk tombol logout */
             color: white;
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
             box-sizing: border-box;
             text-decoration: none;
+            text-align: center;
+        }
+
+        .logout-button {
+            background-color: #dc3545; /* Warna merah untuk tombol logout */
         }
 
         .logout-button:hover {
             background-color: #c82333;
         }
 
-        #adminOptionsContainer {
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+        .kembali-button {
+            background-color: #6c757d; /* Warna abu-abu untuk tombol kembali */
         }
 
-        .admin-option-button {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 10px;
-            border: none;
-            border-radius: 6px;
-            background-color: #6c757d; /* Warna abu-abu untuk pilihan admin */
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-sizing: border-box;
-            text-decoration: none;
-        }
-
-        .admin-option-button:hover {
+        .kembali-button:hover {
             background-color: #5a6268;
+        }
+
+        #adminUnitOptions, #userOptions {
+            display: none;
+        }
+
+        #adminUnitOptions.show, #userOptions.show {
+            display: block;
         }
     </style>
 </head>
@@ -186,17 +193,20 @@
             <p id="error" class="error-message hidden">Username atau password salah.</p>
         </div>
 
-        <div id="menuContainer" class="menu-container hidden">
-            <h3>Pilihan</h3>
-            <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-            <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
-            <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-            <button class="logout-button" onclick="logout()">Log Out</button>
-            <div id="adminOptionsContainer" class="hidden">
+        <div id="menuContainer">
+            <div id="adminUnitOptions">
                 <h3>Pilih Unit</h3>
-                <button class="admin-option-button" onclick="openPengecekanForm('tirtakusuma')">Tirta Kusuma</button>
-                <button class="admin-option-button" onclick="openPengecekanForm('tirtajaya')">Tirta Jaya</button>
-                <button class="admin-option-button" onclick="openPengecekanForm('margotirto')">Margo Tirto</button>
+                <button class="admin-unit-button" onclick="showUserOptions('tirtakusuma')">Tirta Kusuma</button>
+                <button class="admin-unit-button" onclick="showUserOptions('tirtajaya')">Tirta Jaya</button>
+                <button class="admin-unit-button" onclick="showUserOptions('margotirto')">Margo Tirto</button>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </div>
+            <div id="userOptions">
+                <h3>Pilihan</h3>
+                <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+                <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
+                <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+                <button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
             </div>
         </div>
 
@@ -211,7 +221,7 @@
             'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform' },
             'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform' },
             'margotirto': { password: 'samuji', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform' },
-            'admin': { password: 'khodari22' }
+            'admin': { password: 'passwordadmin' }
             // Anda bisa menambahkan lebih banyak pengguna di sini
         };
 
@@ -220,9 +230,11 @@
         const errorElement = document.getElementById('error');
         const comingSoonContainer = document.getElementById('comingSoonContainer');
         const comingSoonTextElement = document.getElementById('comingSoonText');
-        const adminOptionsContainer = document.getElementById('adminOptionsContainer');
+        const adminUnitOptionsDiv = document.getElementById('adminUnitOptions');
+        const userOptionsDiv = document.getElementById('userOptions');
 
-        let loggedInUsername = null; // Untuk menyimpan username yang berhasil login
+        let loggedInUsername = null;
+        let selectedUnit = null;
 
         function login() {
             const usernameInput = document.getElementById('username');
@@ -233,45 +245,58 @@
 
             if (users.hasOwnProperty(username) && users[username].password === password) {
                 loginForm.classList.add('hidden');
-                menuContainer.classList.remove('hidden');
+                menuContainer.classList.add('show');
                 errorElement.classList.add('hidden');
-                loggedInUsername = username; // Simpan username saat login berhasil
+                loggedInUsername = username;
                 if (username === 'admin') {
-                    adminOptionsContainer.classList.remove('hidden');
+                    adminUnitOptionsDiv.classList.add('show');
+                    userOptionsDiv.classList.remove('show');
                 } else {
-                    adminOptionsContainer.classList.add('hidden');
+                    adminUnitOptionsDiv.classList.remove('show');
+                    userOptionsDiv.classList.add('show');
                 }
             } else {
                 errorElement.classList.remove('hidden');
-                adminOptionsContainer.classList.add('hidden'); // Pastikan opsi admin tersembunyi jika login gagal
+                adminUnitOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.remove('show');
+                menuContainer.classList.remove('show');
             }
         }
 
+        function showAdminUnitOptions() {
+            adminUnitOptionsDiv.classList.add('show');
+            userOptionsDiv.classList.remove('show');
+            selectedUnit = null;
+        }
+
+        function showUserOptions(unit) {
+            selectedUnit = unit;
+            adminUnitOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.add('show');
+        }
+
         function goToPengecekan() {
-            if (loggedInUsername && loggedInUsername !== 'admin') {
-                if (users.hasOwnProperty(loggedInUsername) && users[loggedInUsername].pengecekanLink) {
-                    window.location.href = users[loggedInUsername].pengecekanLink;
-                } else {
-                    alert('Link Input Data Penggunaan tidak ditemukan untuk user ini.');
+            if (loggedInUsername) {
+                let link = null;
+                if (loggedInUsername === 'admin' && selectedUnit) {
+                    link = users[selectedUnit] ? users[selectedUnit].pengecekanLink : null;
+                } else if (loggedInUsername !== 'admin') {
+                    link = users[loggedInUsername] ? users[loggedInUsername].pengecekanLink : null;
                 }
-            } else if (loggedInUsername === 'admin') {
-                // Admin akan memilih unit, fungsi openPengecekanForm yang akan dipanggil
+
+                if (link) {
+                    window.location.href = link;
+                } else {
+                    alert('Link Input Data Penggunaan tidak ditemukan.');
+                }
             } else {
                 alert('Anda belum login.');
             }
         }
 
-        function openPengecekanForm(unit) {
-            if (users.hasOwnProperty(unit) && users[unit].pengecekanLink) {
-                window.location.href = users[unit].pengecekanLink;
-            } else {
-                alert('Link Input Data Penggunaan tidak ditemukan untuk unit ini.');
-            }
-        }
-
         function showComingSoon(feature) {
-            menuContainer.classList.add('hidden');
-            comingSoonContainer.classList.remove('hidden');
+            userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.add('show');
             if (feature === 'standAwal') {
                 comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
             } else if (feature === 'srBaru') {
@@ -280,15 +305,17 @@
         }
 
         function hideComingSoon() {
-            comingSoonContainer.classList.add('hidden');
-            menuContainer.classList.remove('hidden');
+            comingSoonContainer.classList.remove('show');
+            userOptionsDiv.classList.add('show');
         }
 
         function logout() {
             loggedInUsername = null;
-            menuContainer.classList.add('hidden');
+            selectedUnit = null;
+            menuContainer.classList.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
             loginForm.classList.remove('hidden');
-            adminOptionsContainer.classList.add('hidden'); // Sembunyikan opsi admin saat logout
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         }
