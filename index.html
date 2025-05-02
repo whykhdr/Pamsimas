@@ -172,6 +172,10 @@
         #adminUnitOptions.show, #userOptions.show {
             display: block;
         }
+
+        #comingSoonContainer.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -212,7 +216,7 @@
 
         <div id="comingSoonContainer" class="coming-soon hidden">
             <p id="comingSoonText"></p>
-            <button onclick="hideComingSoon()">Kembali</button>
+            <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
         </div>
     </div>
 
@@ -221,7 +225,7 @@
             'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform' },
             'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform' },
             'margotirto': { password: 'samuji', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform' },
-            'admin': { password: 'passwordadmin' }
+            'admin': { password: 'khodari22' }
             // Anda bisa menambahkan lebih banyak pengguna di sini
         };
 
@@ -255,17 +259,20 @@
                     adminUnitOptionsDiv.classList.remove('show');
                     userOptionsDiv.classList.add('show');
                 }
+                comingSoonContainer.classList.remove('show'); // Pastikan coming soon tersembunyi saat login
             } else {
                 errorElement.classList.remove('hidden');
                 adminUnitOptionsDiv.classList.remove('show');
                 userOptionsDiv.classList.remove('show');
                 menuContainer.classList.remove('show');
+                comingSoonContainer.classList.remove('show'); // Pastikan coming soon tersembunyi saat login gagal
             }
         }
 
         function showAdminUnitOptions() {
             adminUnitOptionsDiv.classList.add('show');
             userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.remove('show');
             selectedUnit = null;
         }
 
@@ -273,6 +280,7 @@
             selectedUnit = unit;
             adminUnitOptionsDiv.classList.remove('show');
             userOptionsDiv.classList.add('show');
+            comingSoonContainer.classList.remove('show');
         }
 
         function goToPengecekan() {
@@ -296,6 +304,7 @@
 
         function showComingSoon(feature) {
             userOptionsDiv.classList.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
             comingSoonContainer.classList.add('show');
             if (feature === 'standAwal') {
                 comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
@@ -306,7 +315,13 @@
 
         function hideComingSoon() {
             comingSoonContainer.classList.remove('show');
-            userOptionsDiv.classList.add('show');
+            if (loggedInUsername === 'admin') {
+                adminUnitOptionsDiv.classList.add('show');
+                userOptionsDiv.classList.remove('show');
+            } else {
+                userOptionsDiv.classList.add('show');
+                adminUnitOptionsDiv.classList.remove('show');
+            }
         }
 
         function logout() {
@@ -315,6 +330,7 @@
             menuContainer.classList.remove('show');
             adminUnitOptionsDiv.classList.remove('show');
             userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.remove('show');
             loginForm.classList.remove('hidden');
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
