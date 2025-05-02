@@ -1,153 +1,104 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login Kustom dengan Cloudflare - Akses Google Forms</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #eef2f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    #login, #dashboard {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      padding: 2rem;
-      width: 350px;
-      text-align: center;
-    }
-    input[type="text"], input[type="password"] {
-      width: 100%;
-      padding: 0.5rem;
-      margin: 0.75rem 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #0069ff;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0053cc;
-    }
-    #error {
-      color: #d44;
-      min-height: 1.2em;
-    }
-    iframe {
-      margin-top: 1rem;
-      border: none;
-      width: 100%;
-      height: 600px;
-      border-radius: 6px;
-    }
-    #logout-btn {
-      margin-top: 1rem;
-      background-color: #d33;
-    }
-    #logout-btn:hover {
-      background-color: #a22;
-    }
-  </style>
+    <title>Custom Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <div id="login">
-    <h2>Login</h2>
-    <div id="error"></div>
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-    <button id="login-btn">Log In</button>
-  </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button onclick="login()">Login</button>
+        <p id="error" class="error-message" style="display:none;">Username atau password salah.</p>
+    </div>
 
-  <div id="dashboard" style="display:none;">
-    <h2>Selamat datang, <span id="user-name-display"></span></h2>
-    <div id="form-area"></div>
-    <button id="logout-btn">Logout</button>
-  </div>
+    <script>
+        const users = {
+            'tirtakusuma': { password: 'suciani', redirect: 'https://docs.google.com/forms/d/1SDTesYFuLeppmwFfimH3nlbeabObccbbLEM9voBdIuE/closedform' },
+            'user2': { password: 'pass2', redirect: 'LINK_GOOGLE_FORM_2' },
+            'user3': { password: 'pass3', redirect: 'LINK_GOOGLE_FORM_3' }
+        };
 
-  <script>
-    // Daftar pengguna yang terdaftar
-    const users = {
-      "user1": {
-        password: "suciani",
-        formUrl: "https://docs.google.com/forms/d/e/1SDTesYFuLeppmwFfimH3nlbeabObccbbLEM9voBdIuE/viewform?embedded=true"
-      },
-      "user2": {
-        password: "password2",
-        formUrl: "https://docs.google.com/forms/d/e/FORM_ID_2/viewform?embedded=true"
-      },
-      "user3": {
-        password: "password3",
-        formUrl: "https://docs.google.com/forms/d/e/FORM_ID_3/viewform?embedded=true"
-      }
-    };
+        function login() {
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const errorElement = document.getElementById('error');
 
-    const loginDiv = document.getElementById("login");
-    const dashboardDiv = document.getElementById("dashboard");
-    const errorDiv = document.getElementById("error");
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-    const userNameDisplay = document.getElementById("user-name-display");
-    const formArea = document.getElementById("form-area");
+            const username = usernameInput.value;
+            const password = passwordInput.value;
 
-    function login() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value;
-
-      if (!username || !password) {
-        errorDiv.textContent = "Silakan masukkan username dan password.";
-        return;
-      }
-
-      const user = users[username];
-      if (user && user.password === password) {
-        // Login berhasil
-        errorDiv.textContent = "";
-        userNameDisplay.textContent = username;
-        loginDiv.style.display = "none";
-        dashboardDiv.style.display = "block";
-
-        // Tampilkan Google Form untuk pengguna ini
-        formArea.innerHTML = '&lt;iframe src="' + user.formUrl + '" frameborder="0"&gt;Loading…&lt;/iframe&gt;';
-      } else {
-        errorDiv.textContent = "Username atau password salah.";
-      }
-    }
-
-    function logout() {
-      // Reset tampilan ke layar login
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-      errorDiv.textContent = "";
-      formArea.innerHTML = "";
-      userNameDisplay.textContent = "";
-      dashboardDiv.style.display = "none";
-      loginDiv.style.display = "block";
-    }
-
-    loginBtn.addEventListener("click", login);
-    logoutBtn.addEventListener("click", logout);
-    document.getElementById("password").addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
-        login();
-      }
-    });
-  </script>
+            if (users.hasOwnProperty(username) && users[username].password === password) {
+                window.location.href = users[username].redirect;
+            } else {
+                errorElement.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
-
-```
-
