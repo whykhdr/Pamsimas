@@ -1,0 +1,155 @@
+`custom-login-google-forms.html`
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Kustom dengan Cloudflare - Akses Google Forms</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #login, #dashboard {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+      width: 350px;
+      text-align: center;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.75rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #0069ff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0053cc;
+    }
+    #error {
+      color: #d44;
+      min-height: 1.2em;
+    }
+    iframe {
+      margin-top: 1rem;
+      border: none;
+      width: 100%;
+      height: 600px;
+      border-radius: 6px;
+    }
+    #logout-btn {
+      margin-top: 1rem;
+      background-color: #d33;
+    }
+    #logout-btn:hover {
+      background-color: #a22;
+    }
+  </style>
+</head>
+<body>
+  <div id="login">
+    <h2>Login</h2>
+    <div id="error"></div>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="login-btn">Log In</button>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <h2>Selamat datang, <span id="user-name-display"></span></h2>
+    <div id="form-area"></div>
+    <button id="logout-btn">Logout</button>
+  </div>
+
+  <script>
+    // Daftar pengguna yang terdaftar
+    const users = {
+      "user1": {
+        password: "password1",
+        formUrl: "https://docs.google.com/forms/d/e/FORM_ID_1/viewform?embedded=true"
+      },
+      "user2": {
+        password: "password2",
+        formUrl: "https://docs.google.com/forms/d/e/FORM_ID_2/viewform?embedded=true"
+      },
+      "user3": {
+        password: "password3",
+        formUrl: "https://docs.google.com/forms/d/e/FORM_ID_3/viewform?embedded=true"
+      }
+    };
+
+    const loginDiv = document.getElementById("login");
+    const dashboardDiv = document.getElementById("dashboard");
+    const errorDiv = document.getElementById("error");
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const userNameDisplay = document.getElementById("user-name-display");
+    const formArea = document.getElementById("form-area");
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!username || !password) {
+        errorDiv.textContent = "Silakan masukkan username dan password.";
+        return;
+      }
+
+      const user = users[username];
+      if (user && user.password === password) {
+        // Login berhasil
+        errorDiv.textContent = "";
+        userNameDisplay.textContent = username;
+        loginDiv.style.display = "none";
+        dashboardDiv.style.display = "block";
+
+        // Tampilkan Google Form untuk pengguna ini
+        formArea.innerHTML = '&lt;iframe src="' + user.formUrl + '" frameborder="0"&gt;Loading…&lt;/iframe&gt;';
+      } else {
+        errorDiv.textContent = "Username atau password salah.";
+      }
+    }
+
+    function logout() {
+      // Reset tampilan ke layar login
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      errorDiv.textContent = "";
+      formArea.innerHTML = "";
+      userNameDisplay.textContent = "";
+      dashboardDiv.style.display = "none";
+      loginDiv.style.display = "block";
+    }
+
+    loginBtn.addEventListener("click", login);
+    logoutBtn.addEventListener("click", logout);
+    document.getElementById("password").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        login();
+      }
+    });
+  </script>
+</body>
+</html>
+
+```
+
