@@ -218,11 +218,6 @@
             <p id="comingSoonText"></p>
             <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
         </div>
-
-        <div style="margin-top: 20px; text-align: center;">
-            <button onclick="lihatLogLogin()">Lihat Log Aktivitas Login</button>
-            <textarea id="loginActivityLog" rows="10" cols="50" style="width: 98%; max-width: 500px; margin-top: 10px;"></textarea>
-        </div>
     </div>
 
     <script>
@@ -245,35 +240,6 @@
         let loggedInUsername = null;
         let selectedUnit = null;
 
-        // Fungsi untuk mencatat aktivitas login
-        function logLogin(username) {
-            const timestamp = new Date().toLocaleString('id-ID'); // Format waktu Indonesia
-            const logEntry = `${timestamp} - User '${username}' berhasil login.\n`;
-            let loginLogs = localStorage.getItem('loginLogs') || '';
-            loginLogs += logEntry;
-            localStorage.setItem('loginLogs', loginLogs);
-            console.log('Aktivitas Login Tercatat:', logEntry); // Untuk melihat log di console browser
-        }
-
-        // Cek status login saat halaman dimuat (opsional, bisa dihapus jika tidak ingin menyimpan status login)
-        // if (localStorage.getItem('loggedInUsername')) {
-        //     loggedInUsername = localStorage.getItem('loggedInUsername');
-        //     loginForm.classList.add('hidden');
-        //     menuContainer.classList.add('show');
-        //     if (loggedInUsername === 'admin') {
-        //         adminUnitOptionsDiv.classList.add('show');
-        //         userOptionsDiv.classList.remove('show');
-        //     } else {
-        //         adminUnitOptionsDiv.classList.remove('show');
-        //         userOptionsDiv.classList.add('show');
-        //     }
-        // } else {
-        //     loginForm.classList.remove('hidden');
-        //     menuContainer.classList.remove('show');
-        //     adminUnitOptionsDiv.classList.remove('show');
-        //     userOptionsDiv.classList.remove('show');
-        // }
-
         function login() {
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
@@ -295,7 +261,6 @@
                     userOptionsDiv.classList.add('show');
                 }
                 comingSoonContainer.classList.remove('show');
-                logLogin(username); // Catat aktivitas login setelah berhasil
             } else {
                 errorElement.classList.remove('hidden');
                 adminUnitOptionsDiv.classList.remove('show');
@@ -372,11 +337,6 @@
             loginForm.classList.remove('hidden');
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-        }
-
-        function lihatLogLogin() {
-            const logArea = document.getElementById('loginActivityLog');
-            logArea.value = localStorage.getItem('loginLogs') || 'Belum ada aktivitas login.';
         }
     </script>
 </body>
