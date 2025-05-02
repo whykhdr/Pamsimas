@@ -122,6 +122,26 @@
         .hidden {
             display: none;
         }
+
+        .logout-button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #dc3545; /* Warna merah untuk tombol logout */
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -148,6 +168,7 @@
             <button class="menu-button" onclick="goToPengecekan()">1. Masuk ke Pengecekan</button>
             <button class="menu-button" onclick="showComingSoon('standAwal')">2. Lihat Stand Awal</button>
             <button class="menu-button" onclick="showComingSoon('srBaru')">3. Penambahan SR Baru</button>
+            <button class="logout-button" onclick="logout()">Log Out</button>
         </div>
 
         <div id="comingSoonContainer" class="coming-soon hidden">
@@ -209,6 +230,14 @@
         function hideComingSoon() {
             comingSoonContainer.classList.add('hidden');
             menuContainer.classList.remove('hidden');
+        }
+
+        function logout() {
+            loggedInUsername = null;
+            menuContainer.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
         }
     </script>
 </body>
