@@ -10,29 +10,38 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-image: url('PATH_KE_GAMBAR_ANDA'); /* Ganti dengan path atau URL gambar Anda */
+            background-size: cover; /* Untuk memastikan gambar menutupi seluruh background */
+            background-repeat: no-repeat; /* Agar gambar tidak diulang */
+            background-position: center; /* Agar gambar berada di tengah */
         }
 
         .login-container {
-            background-color: #fff;
+            background-color: #fff; /* Tambahkan warna latar belakang agar form tetap terlihat */
             padding: 35px;
             border-radius: 12px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             width: 98%;
             max-width: 500px;
-            text-align: center; /* Agar deskripsi juga terpusat */
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 10px; /* Ruang lebih sedikit antara judul dan deskripsi */
+            margin-bottom: 10px;
             font-size: 2em;
         }
 
         .login-description {
-            font-size: 0.9em; /* Ukuran font deskripsi lebih kecil dari judul */
-            color: #777; /* Warna teks deskripsi sedikit berbeda */
-            margin-bottom: 20px; /* Ruang antara deskripsi dan form */
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 20px;
         }
 
         .form-group {
@@ -81,6 +90,7 @@
 </head>
 <body>
     <div class="login-container">
+        <img src="PATH_KE_LOGO_ANDA" alt="Logo PAMSIMAS KUJA" class="login-logo">
         <h2>PAMSIMAS KUJA</h2>
         <p class="login-description">Silakan masukkan username dan password Anda.</p>
         <div class="form-group">
