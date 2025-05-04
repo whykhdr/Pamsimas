@@ -4,24 +4,21 @@
     <title>PAMSIMAS KUJA - Selamat Datang</title>
     <style>
         body {
-            font-family: 'Montserrat', sans-serif; /* Font modern dan menarik */
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            /* Latar Belakang Animasi Gradien */
             background: linear-gradient(45deg, #2980b9, #8e44ad, #c0392b, #f39c12);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
-
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 60px;
@@ -33,11 +30,9 @@
             transform: scale(1);
             transition: transform 0.3s ease-in-out;
         }
-
         .container:hover {
             transform: scale(1.02);
         }
-
         .logo {
             width: 120px;
             height: auto;
@@ -45,12 +40,10 @@
             border-radius: 10px;
             animation: logoPulse 2s ease-in-out infinite alternate;
         }
-
         @keyframes logoPulse {
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
-
         h2 {
             text-align: center;
             margin-bottom: 30px;
@@ -59,11 +52,9 @@
             font-weight: bold;
             letter-spacing: 1px;
         }
-
         .form-group {
             margin-bottom: 25px;
         }
-
         label {
             display: block;
             margin-bottom: 8px;
@@ -72,9 +63,7 @@
             color: #7f8c8d;
             text-align: left;
         }
-
-        input[type="text"],
-        input[type="password"] {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 15px;
             border: none;
@@ -85,14 +74,11 @@
             color: #2c3e50;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
+        input[type="text"]:focus, input[type="password"]:focus {
             outline: none;
             background-color: #f0f3f4;
             box-shadow: 0 0 8px rgba(44, 62, 80, 0.3);
         }
-
         button[type="submit"] {
             background-color: #27ae60;
             color: white;
@@ -106,16 +92,14 @@
             width: 100%;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
-            position: relative; /* Menambahkan posisi relatif */
-            z-index: 10; /* Memastikan berada di atas elemen lain */
+            position: relative;
+            z-index: 10;
         }
-
         button[type="submit"]:hover {
             background-color: #2ecc71;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(44, 62, 80, 0.3);
         }
-
         .error-message {
             color: #e74c3c;
             margin-top: 20px;
@@ -123,18 +107,15 @@
             font-size: 1em;
             animation: fadeIn 0.5s ease-in-out;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         #menuContainer {
             margin-top: 40px;
             border-top: 1px solid #ddd;
             padding-top: 40px;
         }
-
         .menu-button, .admin-unit-button, .logout-button, .kembali-button {
             display: block;
             width: 100%;
@@ -151,51 +132,42 @@
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(44, 62, 80, 0.1);
         }
-
         .menu-button {
             background-color: #3498db;
             color: white;
         }
-
         .menu-button:hover {
             background-color: #2980b9;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
         }
-
         .admin-unit-button {
             background-color: #9b59b6;
             color: white;
         }
-
         .admin-unit-button:hover {
             background-color: #8e44ad;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
         }
-
         .logout-button {
             background-color: #e74c3c;
             color: white;
         }
-
         .logout-button:hover {
             background-color: #c0392b;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
         }
-
         .kembali-button {
             background-color: #7f8c8d;
             color: white;
         }
-
         .kembali-button:hover {
             background-color: #6c7a89;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
         }
-
         .coming-soon {
             margin-top: 40px;
             padding: 30px;
@@ -207,15 +179,12 @@
             color: #777;
             animation: fadeIn 0.5s ease-in-out;
         }
-
         .hidden {
             display: none;
         }
-
         #adminUnitOptions.show, #adminOptions.show, #userOptions.show {
             display: block;
         }
-
         #comingSoonContainer.show {
             display: block;
         }
@@ -288,17 +257,15 @@
         const adminUnitOptionsDiv = document.getElementById('adminUnitOptions');
         const adminOptionsDiv = document.getElementById('adminOptions');
         const userOptionsDiv = document.getElementById('userOptions');
-        const logoTextElement = document.querySelector('.container h2'); // Dapatkan elemen h2 di dalam container
+        const logoTextElement = document.querySelector('.container h2');
 
         let loggedInUsername = localStorage.getItem('loggedInUsername');
         let selectedUnit = localStorage.getItem('selectedUnit');
 
-        // Fungsi untuk memperbarui teks logo
         function updateLogoText(namaUnit) {
             logoTextElement.textContent = namaUnit;
         }
 
-        // Cek status login saat halaman dimuat
         if (loggedInUsername) {
             loginForm.classList.add('hidden');
             menuContainer.classList.add('show');
@@ -306,12 +273,12 @@
                 adminUnitOptionsDiv.classList.add('show');
                 adminOptionsDiv.classList.remove('show');
                 userOptionsDiv.classList.remove('show');
-                updateLogoText('Pilih Unit'); // Teks awal untuk admin
+                updateLogoText('Pilih Unit');
             } else {
                 adminUnitOptionsDiv.classList.remove('show');
                 adminOptionsDiv.classList.remove('show');
                 userOptionsDiv.classList.add('show');
-                updateLogoText(users[loggedInUsername].nama); // Tampilkan nama unit user
+                updateLogoText(users[loggedInUsername].nama);
             }
         } else {
             loginForm.classList.remove('hidden');
@@ -319,13 +286,12 @@
             adminUnitOptionsDiv.classList.remove('show');
             adminOptionsDiv.classList.remove('show');
             userOptionsDiv.classList.remove('show');
-            updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
+            updateLogoText('PAMSIMAS KUJA');
         }
 
         function login() {
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
-
             const username = usernameInput.value;
             const password = passwordInput.value;
 
@@ -372,4 +338,62 @@
             localStorage.setItem('selectedUnit', unit);
             selectedUnit = unit;
             adminUnitOptionsDiv.classList.remove('show');
-            adminOptionsDiv
+            adminOptionsDiv.classList.add('show');
+            userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.remove('show');
+            const namaUnit = users[unit] ? users[unit].nama : 'Admin';
+            updateLogoText(namaUnit);
+        }
+
+        function
+        function goToPengecekan() {
+            if (loggedInUsername === 'admin' && selectedUnit) {
+                window.location.href = users[selectedUnit].pengecekanLink;
+            } else if (loggedInUsername !== 'admin') {
+                window.location.href = users[loggedInUsername].pengecekanLink;
+            } else {
+                alert('Pilih unit terlebih dahulu.');
+            }
+        }
+
+        function showComingSoon(fitur) {
+            comingSoonTextElement.textContent = `Fitur "${fitur}" akan segera hadir!`;
+            comingSoonContainer.classList.add('show');
+            menuContainer.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
+        }
+
+        function hideComingSoon() {
+            comingSoonContainer.classList.remove('show');
+            if (loggedInUsername === 'admin') {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.add('show');
+                userOptionsDiv.classList.remove('show');
+                const namaUnit = users[selectedUnit] ? users[selectedUnit].nama : 'Admin';
+                updateLogoText(namaUnit);
+            } else {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.add('show');
+                updateLogoText(users[loggedInUsername].nama);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUsername');
+            localStorage.removeItem('selectedUnit');
+            loggedInUsername = null;
+            selectedUnit = null;
+            menuContainer.classList.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.remove('show');
+            loginForm.classList.remove('hidden');
+            updateLogoText('PAMSIMAS KUJA');
+        }
+    </script>
+</body>
+</html>
