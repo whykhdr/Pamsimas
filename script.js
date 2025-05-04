@@ -175,5 +175,4 @@ function logout() {
     adminOptionsDiv.classList.remove('show');
     userOptionsDiv.classList.remove('show');
     comingSoonContainer.classList.remove('show');
-    loginForm.classList.remove('hidden');
-    document.getElementById
+    loginForm.classList.remove('
