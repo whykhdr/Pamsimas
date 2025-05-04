@@ -4,168 +4,175 @@
     <title>PAMSIMAS KUJA</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font yang lebih modern */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #1E90FF; /* Warna biru laut */
+            /* Gradien Latar Belakang yang Lembut */
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Light Cyan ke Cyan */
         }
 
         .container {
-            background-color: #fff;
-            padding: 35px;
+            background-color: rgba(255, 255, 255, 0.95); /* Sedikit lebih transparan dan cerah */
+            padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Menambahkan shadow */
-            width: 98%;
-            max-width: 500px;
+            /* Efek Bayangan yang Lebih Halus dan Menonjol */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 90%; /* Sedikit lebih responsif */
+            max-width: 400px;
             text-align: center;
         }
 
         .logo {
-            width: 150px;
+            width: 100px; /* Ukuran logo sedikit disesuaikan */
             height: auto;
-            margin-bottom: 20px;
-            border-radius: 0%;
+            margin-bottom: 30px;
+            border-radius: 5px;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 2em;
+            margin-bottom: 30px;
+            font-size: 2.5em; /* Ukuran font judul lebih besar */
+            color: #2c3e50; /* Warna teks judul yang lebih menarik */
+            font-weight: bold;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 22px;
         }
 
         label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.1em;
+            color: #555;
+            text-align: left; /* Label rata kiri */
         }
 
         input[type="text"],
-        input[type="password"],
-        button[type="submit"] {
+        input[type="password"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             border-radius: 6px;
             box-sizing: border-box;
-            font-size: 1.2em;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #00bcd4; /* Warna fokus yang berbeda */
+            box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
         }
 
         button[type="submit"] {
-            background-color: #28a745; /* Warna hijau untuk tombol login */
+            background-color: #00bcd4; /* Warna tombol yang berbeda */
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 18px;
-            padding: 14px;
-            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 25px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            width: 100%;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Efek bayangan pada tombol */
         }
 
         button[type="submit"]:hover {
-            background-color: #1e7e34;
+            background-color: #00acc1; /* Warna hover yang sedikit lebih gelap */
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         .error-message {
-            color: red;
-            margin-top: 10px;
+            color: #e57373; /* Warna error yang berbeda */
+            margin-top: 15px;
             text-align: center;
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
         #menuContainer {
-            margin-top: 20px;
+            margin-top: 30px;
             border-top: 1px solid #eee;
-            padding-top: 20px;
+            padding-top: 30px;
         }
 
-        .menu-button, .admin-unit-button {
+        .menu-button, .admin-unit-button, .logout-button, .kembali-button {
             display: block;
             width: 100%;
             padding: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             border: none;
             border-radius: 6px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             box-sizing: border-box;
             text-decoration: none;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .menu-button {
-            background-color: #007bff;
+            background-color: #4caf50; /* Hijau yang berbeda */
             color: white;
         }
 
         .menu-button:hover {
-            background-color: #0056b3;
+            background-color: #43a047;
+            transform: scale(1.01);
         }
 
         .admin-unit-button {
-            background-color: #6c757d; /* Warna abu-abu untuk pilihan unit admin */
+            background-color: #607d8b; /* Abu-abu kebiruan */
             color: white;
         }
 
         .admin-unit-button:hover {
-            background-color: #5a6268;
+            background-color: #546e7a;
+            transform: scale(1.01);
+        }
+
+        .logout-button {
+            background-color: #f44336; /* Merah yang berbeda */
+            color: white;
+        }
+
+        .logout-button:hover {
+            background-color: #e53935;
+            transform: scale(1.01);
+        }
+
+        .kembali-button {
+            background-color: #9e9e9e; /* Abu-abu yang berbeda */
+            color: white;
+        }
+
+        .kembali-button:hover {
+            background-color: #757575;
+            transform: scale(1.01);
         }
 
         .coming-soon {
-            margin-top: 20px;
-            padding: 20px;
+            margin-top: 30px;
+            padding: 25px;
             border: 1px solid #ccc;
             border-radius: 6px;
             background-color: #f9f9f9;
             text-align: center;
-            font-size: 1.1em;
+            font-size: 1em;
             color: #777;
         }
 
         .hidden {
-            display: none;
-        }
-
-        .logout-button, .kembali-button {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 6px;
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-sizing: border-box;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .logout-button {
-            background-color: #dc3545; /* Warna merah untuk tombol logout */
-        }
-
-        .logout-button:hover {
-            background-color: #c82333;
-        }
-
-        .kembali-button {
-            background-color: #6c757d; /* Warna abu-abu untuk tombol kembali */
-        }
-
-        .kembali-button:hover {
-            background-color: #5a6268;
-        }
-
-        #adminUnitOptions, #adminOptions, #userOptions {
             display: none;
         }
 
@@ -373,41 +380,3 @@
                 comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
             } else if (feature === 'srBaru') {
                 comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru - Coming Soon';
-            }
-            // Teks logo tetap sesuai unit yang dipilih
-        }
-
-        function hideComingSoon() {
-            comingSoonContainer.classList.remove('show');
-            if (loggedInUsername === 'admin') {
-                adminUnitOptionsDiv.classList.remove('show');
-                adminOptionsDiv.classList.add('show');
-                userOptionsDiv.classList.remove('show');
-                const namaUnit = users[selectedUnit] ? users[selectedUnit].nama : 'Admin';
-                updateLogoText(namaUnit);
-            } else {
-                adminUnitOptionsDiv.classList.remove('show');
-                adminOptionsDiv.classList.remove('show');
-                userOptionsDiv.classList.add('show');
-                updateLogoText(users[loggedInUsername].nama);
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('loggedInUsername');
-            localStorage.removeItem('selectedUnit');
-            loggedInUsername = null;
-            selectedUnit = null;
-            menuContainer.classList.remove('show');
-            adminUnitOptionsDiv.classList.remove('show');
-            adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.remove('show');
-            comingSoonContainer.classList.remove('show');
-            loginForm.classList.remove('hidden');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
-        }
-    </script>
-</body>
-</html>
