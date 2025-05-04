@@ -4,175 +4,168 @@
     <title>PAMSIMAS KUJA</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font yang lebih modern */
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            /* Gradien Latar Belakang yang Lembut */
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Light Cyan ke Cyan */
+            background-color: #1E90FF; /* Warna biru laut */
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.95); /* Sedikit lebih transparan dan cerah */
-            padding: 40px;
+            background-color: #fff;
+            padding: 35px;
             border-radius: 12px;
-            /* Efek Bayangan yang Lebih Halus dan Menonjol */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            width: 90%; /* Sedikit lebih responsif */
-            max-width: 400px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Menambahkan shadow */
+            width: 98%;
+            max-width: 500px;
             text-align: center;
         }
 
         .logo {
-            width: 100px; /* Ukuran logo sedikit disesuaikan */
+            width: 150px;
             height: auto;
-            margin-bottom: 30px;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            border-radius: 0%;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em; /* Ukuran font judul lebih besar */
-            color: #2c3e50; /* Warna teks judul yang lebih menarik */
-            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 2em;
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 6px;
             font-weight: bold;
-            font-size: 1.1em;
-            color: #555;
-            text-align: left; /* Label rata kiri */
+            font-size: 1.2em;
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        button[type="submit"] {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
+            padding: 12px;
+            border: 1px solid #ccc;
             border-radius: 6px;
             box-sizing: border-box;
-            font-size: 1em;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #00bcd4; /* Warna fokus yang berbeda */
-            box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+            font-size: 1.2em;
         }
 
         button[type="submit"] {
-            background-color: #00bcd4; /* Warna tombol yang berbeda */
+            background-color: #28a745; /* Warna hijau untuk tombol login */
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 25px;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
-            width: 100%;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Efek bayangan pada tombol */
+            transition: background-color 0.3s ease;
+            margin-top: 18px;
+            padding: 14px;
+            font-size: 1.2em;
         }
 
         button[type="submit"]:hover {
-            background-color: #00acc1; /* Warna hover yang sedikit lebih gelap */
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background-color: #1e7e34;
         }
 
         .error-message {
-            color: #e57373; /* Warna error yang berbeda */
-            margin-top: 15px;
+            color: red;
+            margin-top: 10px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1em;
         }
 
         #menuContainer {
-            margin-top: 30px;
+            margin-top: 20px;
             border-top: 1px solid #eee;
-            padding-top: 30px;
+            padding-top: 20px;
         }
 
-        .menu-button, .admin-unit-button, .logout-button, .kembali-button {
+        .menu-button, .admin-unit-button {
             display: block;
             width: 100%;
             padding: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border: none;
             border-radius: 6px;
-            font-size: 1.1em;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease;
             box-sizing: border-box;
             text-decoration: none;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .menu-button {
-            background-color: #4caf50; /* Hijau yang berbeda */
+            background-color: #007bff;
             color: white;
         }
 
         .menu-button:hover {
-            background-color: #43a047;
-            transform: scale(1.01);
+            background-color: #0056b3;
         }
 
         .admin-unit-button {
-            background-color: #607d8b; /* Abu-abu kebiruan */
+            background-color: #6c757d; /* Warna abu-abu untuk pilihan unit admin */
             color: white;
         }
 
         .admin-unit-button:hover {
-            background-color: #546e7a;
-            transform: scale(1.01);
-        }
-
-        .logout-button {
-            background-color: #f44336; /* Merah yang berbeda */
-            color: white;
-        }
-
-        .logout-button:hover {
-            background-color: #e53935;
-            transform: scale(1.01);
-        }
-
-        .kembali-button {
-            background-color: #9e9e9e; /* Abu-abu yang berbeda */
-            color: white;
-        }
-
-        .kembali-button:hover {
-            background-color: #757575;
-            transform: scale(1.01);
+            background-color: #5a6268;
         }
 
         .coming-soon {
-            margin-top: 30px;
-            padding: 25px;
+            margin-top: 20px;
+            padding: 20px;
             border: 1px solid #ccc;
             border-radius: 6px;
             background-color: #f9f9f9;
             text-align: center;
-            font-size: 1em;
+            font-size: 1.1em;
             color: #777;
         }
 
         .hidden {
+            display: none;
+        }
+
+        .logout-button, .kembali-button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .logout-button {
+            background-color: #dc3545; /* Warna merah untuk tombol logout */
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+
+        .kembali-button {
+            background-color: #6c757d; /* Warna abu-abu untuk tombol kembali */
+        }
+
+        .kembali-button:hover {
+            background-color: #5a6268;
+        }
+
+        #adminUnitOptions, #adminOptions, #userOptions {
             display: none;
         }
 
@@ -379,4 +372,34 @@
             if (feature === 'standAwal') {
                 comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
             } else if (feature === 'srBaru') {
-                comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru
+                comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru - Coming Soon';
+            }
+            // Teks logo tetap sesuai unit yang dipilih
+        }
+
+        function hideComingSoon() {
+            comingSoonContainer.classList.remove('show');
+            if (loggedInUsername === 'admin') {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.add('show');
+                userOptionsDiv.classList.remove('show');
+                const namaUnit = users[selectedUnit] ? users[selectedUnit].nama : 'Admin';
+                updateLogoText(namaUnit);
+            } else {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.add('show');
+                updateLogoText(users[loggedInUsername].nama);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUsername');
+            localStorage.removeItem('selectedUnit');
+            loggedInUsername = null;
+            selectedUnit = null;
+            menuContainer.classList.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            coming
