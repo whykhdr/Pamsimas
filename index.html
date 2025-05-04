@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAMSIMAS KUJA</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        Body {
+        body {
             font-family: sans-serif;
             display: flex;
             justify-content: center;
@@ -33,7 +30,7 @@
             border-radius: 0%;
         }
 
-        h2.logo-text {
+        h2 {
             text-align: center;
             margin-bottom: 20px;
             font-size: 2em;
@@ -52,7 +49,6 @@
 
         input[type="text"],
         input[type="password"],
-        button[type="button"], /* Menambahkan styling untuk button[type="button"] */
         button[type="submit"] {
             width: 100%;
             padding: 12px;
@@ -62,7 +58,6 @@
             font-size: 1.2em;
         }
 
-        button[type="button"], /* Styling khusus untuk tombol (termasuk login) */
         button[type="submit"] {
             background-color: #28a745; /* Warna hijau untuk tombol login */
             color: white;
@@ -73,7 +68,6 @@
             font-size: 1.2em;
         }
 
-        button[type="button"]:hover, /* Efek hover untuk tombol */
         button[type="submit"]:hover {
             background-color: #1e7e34;
         }
@@ -139,10 +133,6 @@
             display: none;
         }
 
-        .show {
-            display: block;
-        }
-
         .logout-button, .kembali-button {
             display: block;
             width: 100%;
@@ -191,7 +181,7 @@
 <body>
     <div class="container">
         <img src="https://raw.githubusercontent.com/whykhdr/Pamsimas/refs/heads/main/IMG-20250305-WA0011-removebg-preview.png" alt="Logo PAMSIMAS KUJA" class="logo">
-        <h2 class="logo-text">PAMSIMAS KUJA</h2>
+        <h2>PAMSIMAS KUJA</h2>
 
         <div id="loginForm">
             <p class="login-description">Silakan masukkan username dan password Anda.</p>
@@ -203,26 +193,26 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="button" onclick="login()">Login</button>
+            <button type="submit" onclick="login()">Login</button>
             <p id="error" class="error-message hidden">Username atau password salah.</p>
         </div>
 
-        <div id="menuContainer" class="hidden">
-            <div id="adminUnitOptions" class="hidden">
+        <div id="menuContainer">
+            <div id="adminUnitOptions">
                 <h3>Pilih Unit</h3>
                 <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
                 <button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
                 <button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
                 <button class="logout-button" onclick="logout()">Log Out</button>
             </div>
-            <div id="adminOptions" class="hidden">
+            <div id="adminOptions">
                 <h3>Pilihan Admin</h3>
                 <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
                 <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
                 <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
                 <button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
             </div>
-            <div id="userOptions" class="hidden">
+            <div id="userOptions">
                 <h3>Pilihan</h3>
                 <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
                 <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
@@ -238,7 +228,7 @@
     </div>
 
     <script>
-        Const users = {
+        const users = {
             'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
             'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
             'margotirto': { password: 'samuji', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', nama: 'Margo Tirto' },
@@ -254,7 +244,7 @@
         const adminUnitOptionsDiv = document.getElementById('adminUnitOptions');
         const adminOptionsDiv = document.getElementById('adminOptions');
         const userOptionsDiv = document.getElementById('userOptions');
-        const logoTextElement = document.querySelector('.logo-text'); // Dapatkan elemen h2 dengan kelas logo-text
+        const logoTextElement = document.querySelector('.container h2'); // Dapatkan elemen h2 di dalam container
 
         let loggedInUsername = localStorage.getItem('loggedInUsername');
         let selectedUnit = localStorage.getItem('selectedUnit');
@@ -265,85 +255,55 @@
         }
 
         // Cek status login saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', () => {
-            if (loggedInUsername) {
-                loginForm.classList.add('hidden');
-                menuContainer.classList.add('show');
-                if (loggedInUsername === 'admin') {
-                    adminUnitOptionsDiv.classList.add('show');
-                    adminOptionsDiv.classList.remove('show');
-                    userOptionsDiv.classList.remove('show');
-                    updateLogoText('Pilih Unit'); // Teks awal untuk admin
-                } else {
-                    adminUnitOptionsDiv.classList.remove('show');
-                    adminOptionsDiv.classList.remove('show');
-                    userOptionsDiv.classList.add('show');
-                    updateLogoText(users[loggedInUsername].nama); // Tampilkan nama unit user
-                }
-            } else {
-                loginForm.classList.remove('hidden');
-                menuContainer.classList.remove('show');
-                adminUnitOptionsDiv.classList.remove('show');
+        if (loggedInUsername) {
+            loginForm.classList.add('hidden');
+            menuContainer.classList.add('show');
+            if (loggedInUsername === 'admin') {
+                adminUnitOptionsDiv.classList.add('show');
                 adminOptionsDiv.classList.remove('show');
                 userOptionsDiv.classList.remove('show');
-                updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
+                updateLogoText('Pilih Unit'); // Teks awal untuk admin
+            } else {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.add('show');
+                updateLogoText(users[loggedInUsername].nama); // Tampilkan nama unit user
             }
-        });
+        } else {
+            loginForm.classList.remove('hidden');
+            menuContainer.classList.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
+        }
 
         function login() {
-            alert('Tombol Login Ditekan!'); // 1. Cek apakah fungsi login terpanggil
-
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
-
-            if (!usernameInput) {
-                alert('Error: Elemen username tidak ditemukan!'); // 2. Cek keberadaan elemen username
-                return;
-            }
-            if (!passwordInput) {
-                alert('Error: Elemen password tidak ditemukan!'); // 3. Cek keberadaan elemen password
-                return;
-            }
 
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            alert('Username yang dimasukkan: ' + username); // 4. Cek nilai username
-            alert('Password yang dimasukkan: ' + password); // 5. Cek nilai password
-
-            if (users.hasOwnProperty(username)) {
-                alert('Username ditemukan dalam data pengguna.'); // 6. Cek apakah username ada di data
-                if (users[username].password === password) {
-                    alert('Password cocok!'); // 7. Cek apakah password cocok
-                    localStorage.setItem('loggedInUsername', username);
-                    loggedInUsername = username;
-                    loginForm.classList.add('hidden');
-                    menuContainer.classList.add('show');
-                    errorElement.classList.add('hidden');
-                    if (username === 'admin') {
-                        adminUnitOptionsDiv.classList.add('show');
-                        adminOptionsDiv.classList.remove('show');
-                        userOptionsDiv.classList.remove('show');
-                        updateLogoText('Pilih Unit');
-                    } else {
-                        adminUnitOptionsDiv.classList.remove('show');
-                        adminOptionsDiv.classList.remove('show');
-                        userOptionsDiv.classList.add('show');
-                        updateLogoText(users[username].nama);
-                    }
-                    comingSoonContainer.classList.remove('show');
-                } else {
-                    alert('Password salah!'); // 8. Password tidak cocok
-                    errorElement.classList.remove('hidden');
-                    adminUnitOptionsDiv.classList.remove('show');
+            if (users.hasOwnProperty(username) && users[username].password === password) {
+                localStorage.setItem('loggedInUsername', username);
+                loggedInUsername = username;
+                loginForm.classList.add('hidden');
+                menuContainer.classList.add('show');
+                errorElement.classList.add('hidden');
+                if (username === 'admin') {
+                    adminUnitOptionsDiv.classList.add('show');
                     adminOptionsDiv.classList.remove('show');
                     userOptionsDiv.classList.remove('show');
-                    menuContainer.classList.remove('show');
-                    comingSoonContainer.classList.remove('show');
-                    updateLogoText('PAMSIMAS KUJA');
+                    updateLogoText('Pilih Unit');
+                } else {
+                    adminUnitOptionsDiv.classList.remove('show');
+                    adminOptionsDiv.classList.remove('show');
+                    userOptionsDiv.classList.add('show');
+                    updateLogoText(users[username].nama);
                 }
+                comingSoonContainer.classList.remove('show');
             } else {
-                alert('Username tidak ditemukan!'); // 9. Username tidak ada di data
                 errorElement.classList.remove('hidden');
                 adminUnitOptionsDiv.classList.remove('show');
                 adminOptionsDiv.classList.remove('show');
@@ -404,4 +364,50 @@
             }
         }
 
-        function showComingSoon
+        function showComingSoon(feature) {
+            adminUnitOptionsDiv.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.add('show');
+            if (feature === 'standAwal') {
+                comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
+            } else if (feature === 'srBaru') {
+                comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru - Coming Soon';
+            }
+            // Teks logo tetap sesuai unit yang dipilih
+        }
+
+        function hideComingSoon() {
+            comingSoonContainer.classList.remove('show');
+            if (loggedInUsername === 'admin') {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.add('show');
+                userOptionsDiv.classList.remove('show');
+                const namaUnit = users[selectedUnit] ? users[selectedUnit].nama : 'Admin';
+                updateLogoText(namaUnit);
+            } else {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.add('show');
+                updateLogoText(users[loggedInUsername].nama);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUsername');
+            localStorage.removeItem('selectedUnit');
+            loggedInUsername = null;
+            selectedUnit = null;
+            menuContainer.class List.remove('show');
+            adminUnitOptionsDiv.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            comingSoonContainer.classList.remove('show');
+            loginForm.classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
+        }
+    </script>
+</body>
+</html>
