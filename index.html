@@ -310,6 +310,7 @@
                     adminOptionsDiv.classList.remove('show');
                     userOptionsDiv.classList.add('show');
                     updateLogoText(users[username].nama);
+                    window.location.href = users[username].pengecekanLink;
                 }
                 comingSoonContainer.classList.remove('show');
             } else {
@@ -392,6 +393,6 @@
             loginForm.classList.remove('hidden');
             updateLogoText('PAMSIMAS KUJA');
         }
-    </script>         
+    </script>
 </body>
 </html>
