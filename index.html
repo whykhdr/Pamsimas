@@ -239,7 +239,6 @@
             <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
         </div>
     </div>
-
     <script>
         const users = {
             'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
@@ -345,7 +344,6 @@
             updateLogoText(namaUnit);
         }
 
-        function
         function goToPengecekan() {
             if (loggedInUsername === 'admin' && selectedUnit) {
                 window.location.href = users[selectedUnit].pengecekanLink;
@@ -394,6 +392,6 @@
             loginForm.classList.remove('hidden');
             updateLogoText('PAMSIMAS KUJA');
         }
-    </script>
+    </script>         
 </body>
 </html>
