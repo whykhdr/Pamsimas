@@ -1,4 +1,4 @@
-const users = {
+Const users = {
     'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
     'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
     'margotirto': { password: 'samuji', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', nama: 'Margo Tirto' },
@@ -51,31 +51,59 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function login() {
+    alert('Tombol Login Ditekan!'); // 1. Cek apakah fungsi login terpanggil
+
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
+
+    if (!usernameInput) {
+        alert('Error: Elemen username tidak ditemukan!'); // 2. Cek keberadaan elemen username
+        return;
+    }
+    if (!passwordInput) {
+        alert('Error: Elemen password tidak ditemukan!'); // 3. Cek keberadaan elemen password
+        return;
+    }
 
     const username = usernameInput.value;
     const password = passwordInput.value;
 
-    if (users.hasOwnProperty(username) && users[username].password === password) {
-        localStorage.setItem('loggedInUsername', username);
-        loggedInUsername = username;
-        loginForm.classList.add('hidden');
-        menuContainer.classList.add('show');
-        errorElement.classList.add('hidden');
-        if (username === 'admin') {
-            adminUnitOptionsDiv.classList.add('show');
-            adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.remove('show');
-            updateLogoText('Pilih Unit');
+    alert('Username yang dimasukkan: ' + username); // 4. Cek nilai username
+    alert('Password yang dimasukkan: ' + password); // 5. Cek nilai password
+
+    if (users.hasOwnProperty(username)) {
+        alert('Username ditemukan dalam data pengguna.'); // 6. Cek apakah username ada di data
+        if (users[username].password === password) {
+            alert('Password cocok!'); // 7. Cek apakah password cocok
+            localStorage.setItem('loggedInUsername', username);
+            loggedInUsername = username;
+            loginForm.classList.add('hidden');
+            menuContainer.classList.add('show');
+            errorElement.classList.add('hidden');
+            if (username === 'admin') {
+                adminUnitOptionsDiv.classList.add('show');
+                adminOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.remove('show');
+                updateLogoText('Pilih Unit');
+            } else {
+                adminUnitOptionsDiv.classList.remove('show');
+                adminOptionsDiv.classList.remove('show');
+                userOptionsDiv.classList.add('show');
+                updateLogoText(users[username].nama);
+            }
+            comingSoonContainer.classList.remove('show');
         } else {
+            alert('Password salah!'); // 8. Password tidak cocok
+            errorElement.classList.remove('hidden');
             adminUnitOptionsDiv.classList.remove('show');
             adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.add('show');
-            updateLogoText(users[username].nama);
+            userOptionsDiv.classList.remove('show');
+            menuContainer.classList.remove('show');
+            comingSoonContainer.classList.remove('show');
+            updateLogoText('PAMSIMAS KUJA');
         }
-        comingSoonContainer.classList.remove('show');
     } else {
+        alert('Username tidak ditemukan!'); // 9. Username tidak ada di data
         errorElement.classList.remove('hidden');
         adminUnitOptionsDiv.classList.remove('show');
         adminOptionsDiv.classList.remove('show');
@@ -175,4 +203,6 @@ function logout() {
     adminOptionsDiv.classList.remove('show');
     userOptionsDiv.classList.remove('show');
     comingSoonContainer.classList.remove('show');
-    loginForm.classList.remove('
+    loginForm.classList.remove('hidden');
+    updateLogoText('PAMSIMAS KUJA');
+}
