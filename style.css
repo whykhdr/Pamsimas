@@ -1,4 +1,4 @@
-body {
+Body {
     font-family: sans-serif;
     display: flex;
     justify-content: center;
@@ -44,6 +44,7 @@ label {
 
 input[type="text"],
 input[type="password"],
+button[type="button"], /* Menambahkan styling untuk button[type="button"] */
 button[type="submit"] {
     width: 100%;
     padding: 12px;
@@ -53,6 +54,7 @@ button[type="submit"] {
     font-size: 1.2em;
 }
 
+button[type="button"], /* Styling khusus untuk tombol (termasuk login) */
 button[type="submit"] {
     background-color: #28a745; /* Warna hijau untuk tombol login */
     color: white;
@@ -63,6 +65,7 @@ button[type="submit"] {
     font-size: 1.2em;
 }
 
+button[type="button"]:hover, /* Efek hover untuk tombol */
 button[type="submit"]:hover {
     background-color: #1e7e34;
 }
