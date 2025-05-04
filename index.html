@@ -106,6 +106,8 @@
             width: 100%;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
+            position: relative; /* Menambahkan posisi relatif */
+            z-index: 10; /* Memastikan berada di atas elemen lain */
         }
 
         button[type="submit"]:hover {
@@ -362,15 +364,4 @@
             userOptionsDiv.classList.remove('show');
             comingSoonContainer.classList.remove('show');
             localStorage.removeItem('selectedUnit');
-            selectedUnit = null;
-            updateLogoText('Pilih Unit');
-        }
-
-        function showAdminOptions(unit) {
-            localStorage.setItem('selectedUnit', unit);
-            selectedUnit = unit;
-            adminUnitOptionsDiv.classList.remove('show');
-            adminOptionsDiv.classList.add('show');
-            userOptionsDiv.classList.remove('show');
-            comingSoonContainer.classList.remove('show');
-            const namaUnit = users[unit] ? users[unit].nama : 'Admin
+            selected
