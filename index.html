@@ -238,7 +238,7 @@
     </div>
 
     <script>
-        Const users = {
+        const userData = {
             'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
             'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
             'margotirto': { password: 'samuji', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', nama: 'Margo Tirto' },
@@ -278,7 +278,7 @@
                     adminUnitOptionsDiv.classList.remove('show');
                     adminOptionsDiv.classList.remove('show');
                     userOptionsDiv.classList.add('show');
-                    updateLogoText(users[loggedInUsername].nama); // Tampilkan nama unit user
+                    updateLogoText(userData[loggedInUsername].nama); // Tampilkan nama unit user
                 }
             } else {
                 loginForm.classList.remove('hidden');
@@ -311,9 +311,9 @@
             alert('Username yang dimasukkan: ' + username); // 4. Cek nilai username
             alert('Password yang dimasukkan: ' + password); // 5. Cek nilai password
 
-            if (users.hasOwnProperty(username)) {
+            if (userData.hasOwnProperty(username)) {
                 alert('Username ditemukan dalam data pengguna.'); // 6. Cek apakah username ada di data
-                if (users[username].password === password) {
+                if (userData[username].password === password) {
                     alert('Password cocok!'); // 7. Cek apakah password cocok
                     localStorage.setItem('loggedInUsername', username);
                     loggedInUsername = username;
@@ -329,7 +329,7 @@
                         adminUnitOptionsDiv.classList.remove('show');
                         adminOptionsDiv.classList.remove('show');
                         userOptionsDiv.classList.add('show');
-                        updateLogoText(users[username].nama);
+                        updateLogoText(userData[username].nama);
                     }
                     comingSoonContainer.classList.remove('show');
                 } else {
@@ -371,7 +371,7 @@
             adminOptionsDiv.classList.add('show');
             userOptionsDiv.classList.remove('show');
             comingSoonContainer.classList.remove('show');
-            const namaUnit = users[unit] ? users[unit].nama : 'Admin';
+            const namaUnit = userData[unit] ? userData[unit].nama : 'Admin';
             updateLogoText(namaUnit);
         }
 
@@ -382,16 +382,16 @@
             adminOptionsDiv.classList.remove('show');
             userOptionsDiv.classList.add('show');
             comingSoonContainer.classList.remove('show');
-            updateLogoText(users[loggedInUsername].nama);
+            updateLogoText(userData[loggedInUsername].nama);
         }
 
         function goToPengecekan() {
             if (loggedInUsername) {
                 let link = null;
                 if (loggedInUsername === 'admin' && selectedUnit) {
-                    link = users[selectedUnit] ? users[selectedUnit].pengecekanLink : null;
+                    link = userData[selectedUnit] ? userData[selectedUnit].pengecekanLink : null;
                 } else if (loggedInUsername !== 'admin') {
-                    link = users[loggedInUsername] ? users[loggedInUsername].pengecekanLink : null;
+                    link = userData[loggedInUsername] ? userData[loggedInUsername].pengecekanLink : null;
                 }
 
                 if (link) {
@@ -404,48 +404,4 @@
             }
         }
 
-        function showComingSoon(feature) {
-            adminUnitOptionsDiv.classList.remove('show');
-            adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.remove('show');
-            comingSoonContainer.classList.add('show');
-            if (feature === 'standAwal') {
-                comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
-            } else if (feature === 'srBaru') {
-                comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru - Coming Soon';
-            }
-            // Teks logo tetap sesuai unit yang dipilih
-        }
-
-        function hideComingSoon() {
-            comingSoonContainer.classList.remove('show');
-            if (loggedInUsername === 'admin') {
-                adminUnitOptionsDiv.classList.remove('show');
-                adminOptionsDiv.classList.add('show');
-                userOptionsDiv.classList.remove('show');
-                const namaUnit = users[selectedUnit] ? users[selectedUnit].nama : 'Admin';
-                updateLogoText(namaUnit);
-            } else {
-                adminUnitOptionsDiv.classList.remove('show');
-                adminOptionsDiv.classList.remove('show');
-                userOptionsDiv.classList.add('show');
-                updateLogoText(users[loggedInUsername].nama);
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('loggedInUsername');
-            localStorage.removeItem('selectedUnit');
-            loggedInUsername = null;
-            selectedUnit = null;
-            menuContainer.classList.remove('show');
-            adminUnitOptionsDiv.classList.remove('show');
-            adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.remove('show');
-            comingSoonContainer.classList.remove('show');
-            loginForm.classList.remove('hidden');
-            updateLogoText('PAMSIMAS KUJA');
-        }
-    </script>
-</body>
-</html>
+        function
