@@ -1,58 +1,414 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PAMSIMAS KUJA</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+<title>PAMSIMAS KUJA</title>
+<style>
+body {
+font-family: sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+margin: 0;
+background-color: #1E90FF; /* Warna biru laut */
+}
+
+.container {
+background-color: #fff;
+padding: 35px;
+border-radius: 12px;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Menambahkan shadow */
+width: 98%;
+max-width: 500px;
+text-align: center;
+}
+
+.logo {
+width: 150px;
+height: auto;
+margin-bottom: 20px;
+border-radius: 0%;
+}
+
+h2 {
+text-align: center;
+margin-bottom: 20px;
+font-size: 2em;
+}
+
+.form-group {
+margin-bottom: 18px;
+}
+
+label {
+display: block;
+margin-bottom: 6px;
+font-weight: bold;
+font-size: 1.2em;
+}
+
+input[type="text"],
+input[type="password"],
+button[type="submit"] {
+width: 100%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 6px;
+box-sizing: border-box;
+font-size: 1.2em;
+}
+
+button[type="submit"] {
+background-color: #28a745; /* Warna hijau untuk tombol login */
+color: white;
+cursor: pointer;
+transition: background-color 0.3s ease;
+margin-top: 18px;
+padding: 14px;
+font-size: 1.2em;
+}
+
+button[type="submit"]:hover {
+background-color: #1e7e34;
+}
+
+.error-message {
+color: red;
+margin-top: 10px;
+text-align: center;
+font-size: 1em;
+}
+
+#menuContainer {
+margin-top: 20px;
+border-top: 1px solid #eee;
+padding-top: 20px;
+}
+
+.menu-button, .admin-unit-button {
+display: block;
+width: 100%;
+padding: 14px;
+margin-bottom: 10px;
+border: none;
+border-radius: 6px;
+font-size: 1.2em;
+cursor: pointer;
+transition: background-color 0.3s ease;
+box-sizing: border-box;
+text-decoration: none;
+text-align: center;
+}
+
+.menu-button {
+background-color: #007bff;
+color: white;
+}
+
+.menu-button:hover {
+background-color: #0056b3;
+}
+
+.admin-unit-button {
+background-color: #6c757d; /* Warna abu-abu untuk pilihan unit admin */
+color: white;
+}
+
+.admin-unit-button:hover {
+background-color: #5a6268;
+}
+
+.coming-soon {
+margin-top: 20px;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 6px;
+background-color: #f9f9f9;
+text-align: center;
+font-size: 1.1em;
+color: #777;
+}
+
+.hidden {
+display: none;
+}
+
+.logout-button, .kembali-button {
+display: block;
+width: 100%;
+padding: 14px;
+margin-top: 10px;
+border: none;
+border-radius: 6px;
+color: white;
+font-size: 1.2em;
+cursor: pointer;
+transition: background-color 0.3s ease;
+box-sizing: border-box;
+text-decoration: none;
+text-align: center;
+}
+
+.logout-button {
+background-color: #dc3545; /* Warna merah untuk tombol logout */
+}
+
+.logout-button:hover {
+background-color: #c82333;
+}
+
+.kembali-button {
+background-color: #6c757d; /* Warna abu-abu untuk tombol kembali */
+}
+
+.kembali-button:hover {
+background-color: #5a6268;
+}
+
+#adminUnitOptions, #adminOptions, #userOptions {
+display: none;
+}
+
+#adminUnitOptions.show, #adminOptions.show, #userOptions.show {
+display: block;
+}
+
+#comingSoonContainer.show {
+display: block;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://raw.githubusercontent.com/whykhdr/Pamsimas/refs/heads/main/IMG-20250305-WA0011-removebg-preview.png" alt="Logo PAMSIMAS KUJA" class="logo">
-        <h2>PAMSIMAS KUJA</h2>
+<div class="container">
+<img src="https://raw.githubusercontent.com/whykhdr/Pamsimas/refs/heads/main/IMG-20250305-WA0011-removebg-preview.png" alt="Logo PAMSIMAS KUJA" class="logo">
+<h2>PAMSIMAS KUJA</h2>
 
-        <div id="loginForm">
-            <p class="login-description">Silakan masukkan username dan password Anda.</p>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" onclick="login()">Login</button>
-            <p id="error" class="error-message hidden">Username atau password salah.</p>
-        </div>
+<div id="loginForm">
+<p class="login-description">Silakan masukkan username dan password Anda.</p>
+<div class="form-group">
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" required>
+</div>
+<div class="form-group">
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" required>
+</div>
+<button type="submit" onclick="login()">Login</button>
+<p id="error" class="error-message hidden">Username atau password salah.</p>
+</div>
 
-        <div id="menuContainer">
-            <div id="adminUnitOptions">
-                <h3>Pilih Unit</h3>
-                <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
-                <button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
-                <button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
-                <button class="logout-button" onclick="logout()">Log Out</button>
-            </div>
-            <div id="adminOptions">
-                <h3>Pilihan Admin</h3>
-                <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-                <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
-                <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-                <button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
-            </div>
-            <div id="userOptions">
-                <h3>Pilihan</h3>
-                <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-                <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
-                <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-                <button class="logout-button" onclick="logout()">Log Out</button>
-            </div>
-        </div>
+<div id="menuContainer">
+<div id="adminUnitOptions">
+<h3>Pilih Unit</h3>
+<button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
+<button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
+<button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
+<button class="logout-button" onclick="logout()">Log Out</button>
+</div>
+<div id="adminOptions">
+<h3>Pilihan Admin</h3>
+<button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+<button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
+<button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+<button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
+</div>
+<div id="userOptions">
+<h3>Pilihan</h3>
+<button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+<button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
+<button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+<button class="logout-button" onclick="logout()">Log Out</button>
+</div>
+</div>
 
-        <div id="comingSoonContainer" class="coming-soon hidden">
-            <p id="comingSoonText"></p>
-            <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
-        </div>
-    </div>
+<div id="comingSoonContainer" class="coming-soon hidden">
+<p id="comingSoonText"></p>
+<button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
+</div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+const users = {
+'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
+'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
+'margotirto': { password: 'samuji', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', nama: 'Margo Tirto' },
+'admin': { password: 'khodari22', nama: 'Admin' }
+// Anda bisa menambahkan lebih banyak pengguna di sini
+};
+
+const loginForm = document.getElementById('loginForm');
+const menuContainer = document.getElementById('menuContainer');
+const errorElement = document.getElementById('error');
+const comingSoonContainer = document.getElementById('comingSoonContainer');
+const comingSoonTextElement = document.getElementById('comingSoonText');
+const adminUnitOptionsDiv = document.getElementById('adminUnitOptions');
+const adminOptionsDiv = document.getElementById('adminOptions');
+const userOptionsDiv = document.getElementById('userOptions');
+const logoTextElement = document.querySelector('.container h2'); // Dapatkan elemen h2 di dalam container
+
+let loggedInUsername = localStorage.getItem('loggedInUsername');
+let selectedUnit = localStorage.getItem('selectedUnit');
+
+// Fungsi untuk memperbarui teks logo
+function updateLogoText(namaUnit) {
+logoTextElement.textContent = namaUnit;
+}
+
+// Cek status login saat halaman dimuat
+if (loggedInUsername) {
+loginForm.classList.add('hidden');
+menuContainer.classList.add('show');
+if (loggedInUsername === 'admin') {
+adminUnitOptionsDiv.classList.add('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+updateLogoText('Pilih Unit'); // Teks awal untuk admin
+} else {
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.add('show');
+updateLogoText(users[loggedInUsername].nama); // Tampilkan nama unit user
+}
+} else {
+loginForm.classList.remove('hidden');
+menuContainer.classList.remove('show');
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
+}
+
+function login() {
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+
+const username = usernameInput.value;
+const password = passwordInput.value;
+
+if (users.hasOwnProperty(username) && users[username].password === password) {
+localStorage.setItem('loggedInUsername', username);
+loggedInUsername = username;
+loginForm.classList.add('hidden');
+menuContainer.classList.add('show');
+errorElement.classList.add('hidden');
+if (username === 'admin') {
+adminUnitOptionsDiv.classList.add('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+updateLogoText('Pilih Unit');
+} else {
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.add('show');
+updateLogoText(users[username].nama);
+}
+comingSoonContainer.classList.remove('show');
+} else {
+errorElement.classList.remove('hidden');
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+menuContainer.classList.remove('show');
+comingSoonContainer.classList.remove('show');
+updateLogoText('PAMSIMAS KUJA');
+}
+}
+
+function showAdminUnitOptions() {
+adminUnitOptionsDiv.classList.add('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+comingSoonContainer.classList.remove('show');
+localStorage.removeItem('selectedUnit');
+selectedUnit = null;
+updateLogoText('Pilih Unit');
+}
+
+function showAdminOptions(unit) {
+localStorage.setItem('selectedUnit', unit);
+selectedUnit = unit;
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.add('show');
+userOptionsDiv.classList.remove('show');
+comingSoonContainer.classList.remove('show');
+const namaUnit = users[unit] ? users[unit].nama : 'Admin';
+updateLogoText(namaUnit);
+}
+
+function showUserOptions(unit) {
+localStorage.setItem('selectedUnit', unit);
+selectedUnit = unit;
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.add('show');
+comingSoonContainer.classList.remove('show');
+updateLogoText(users[loggedInUsername].nama);
+}
+
+function goToPengecekan() {
+if (loggedInUsername) {
+let link = null;
+if (loggedInUsername === 'admin' && selectedUnit) {
+link = users[selectedUnit] ? users[selectedUnit].pengecekanLink : null;
+} else if (loggedInUsername !== 'admin') {
+link = users[loggedInUsername] ? users[loggedInUsername].pengecekanLink : null;
+}
+
+if (link) {
+window.location.href = link;
+} else {
+alert('Link Input Data Penggunaan tidak ditemukan.');
+}
+} else {
+alert('Anda belum login.');
+}
+}
+
+function showComingSoon(feature) {
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+comingSoonContainer.classList.add('show');
+if (feature === 'standAwal') {
+comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
+} else if (feature === 'srBaru') {
+comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru - Coming Soon';
+}
+// Teks logo tetap sesuai unit yang dipilih
+}
+
+function hideComingSoon() {
+comingSoonContainer.classList.remove('show');
+if (loggedInUsername === 'admin') {
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.add('show');
+userOptionsDiv.classList.remove('show');
+const namaUnit = users[selectedUnit] ? users[selectedUnit].nama : 'Admin';
+updateLogoText(namaUnit);
+} else {
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.add('show');
+updateLogoText(users[loggedInUsername].nama);
+}
+}
+
+function logout() {
+localStorage.removeItem('loggedInUsername');
+localStorage.removeItem('selectedUnit');
+loggedInUsername = null;
+selectedUnit = null;
+            menuContainer.classList.remove('show');
+            menuContainer.classList.remove('show');
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+comingSoonContainer.classList.remove('show');
+loginForm.classList.remove('hidden');
+document.getElementById('username').value = '';
+document.getElementById('password').value = '';
+updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
+}
+</script>
 </body>
 </html>
