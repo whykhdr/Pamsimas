@@ -85,5 +85,4 @@ function showAdminUnitOptions() {
     adminUnitOptionsDiv.classList.add('show');
     adminOptionsDiv.classList.remove('show');
     userOptionsDiv.classList.remove('show');
-    comingSoonContainer.classList.remove('show');
-    localStorage.removeItem('selectedUnit
+    coming
