@@ -172,4 +172,3 @@ function logout() {
     document.getElementById('password').value = '';
     updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
 }
-
