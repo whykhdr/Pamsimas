@@ -100,7 +100,7 @@ function showAdminOptions(unit) {
     updateLogoText(namaUnit);
 }
 
-function showUser Options(unit) {
+function showUser Options(unit) { // Perbaikan di sini
     localStorage.setItem('selectedUnit', unit);
     selectedUnit = unit;
     adminUnitOptionsDiv.classList.remove('show');
@@ -172,3 +172,4 @@ function logout() {
     document.getElementById('password').value = '';
     updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
 }
+
