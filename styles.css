@@ -37,7 +37,7 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Menambah jarak antar grup input */
 }
 
 label {
@@ -75,6 +75,7 @@ button {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s; /* Efek transisi */
+    margin-top: 10px; /* Menambah jarak atas tombol */
 }
 
 button:hover {
