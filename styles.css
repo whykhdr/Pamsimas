@@ -37,7 +37,7 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Menambah jarak antar grup input */
 }
 
 label {
