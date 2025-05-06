@@ -1,28 +1,9 @@
 const users = {
-    'tirtakusuma': { 
-        password: 'suciani', 
-        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', 
-        nama: 'Tirta Kusuma',
-        logo: 'tirtakusuma.png' // Logo untuk unit Tirta Kusuma
-    },
-    'tirtajaya': { 
-        password: 'suparno', 
-        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', 
-        nama: 'Tirta Jaya',
-        logo: 'tirtajaya.png' // Logo untuk unit Tirta Jaya
-    },
-    'margotirto': { 
-        password: 'giono', 
-        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', 
-        nama: 'Margo Tirto',
-        logo: 'margotirto.png' // Logo untuk unit Margo Tirto
-    },
-    'admin': { 
-        password: 'khodari22', 
-        nama: 'Admin',
-        logo: 'logo.png' // Logo untuk admin
-    }
-    // Anda bisa menambahkan lebih banyak pengguna di sini
+'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
+'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
+'margotirto': { password: 'giono', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', nama: 'Margo Tirto' },
+'admin': { password: 'khodari22', nama: 'Admin' }
+// Anda bisa menambahkan lebih banyak pengguna di sini
 };
 
 const loginForm = document.getElementById('loginForm');
@@ -68,44 +49,39 @@ updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
 }
 
 function login() {
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
 
-    const username = usernameInput.value;
-    const password = passwordInput.value;
+const username = usernameInput.value;
+const password = passwordInput.value;
 
-    if (users.hasOwnProperty(username) && users[username].password === password) {
-        localStorage.setItem('loggedInUsername', username);
-        loggedInUsername = username;
-        loginForm.classList.add('hidden');
-        menuContainer.classList.add('show');
-        errorElement.classList.add('hidden');
-
-        // Ganti logo sesuai pengguna
-        const logo = document.querySelector('.logo'); // Ambil elemen logo
-        logo.src = users[username].logo; // Ganti dengan logo admin
-
-        if (username === 'admin') {
-            adminUnitOptionsDiv.classList.add('show');
-            adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.remove('show');
-            updateLogoText('Pilih Unit');
-        } else {
-            adminUnitOptionsDiv.classList.remove('show');
-            adminOptionsDiv.classList.remove('show');
-            userOptionsDiv.classList.add('show');
-            updateLogoText(users[username].nama);
-        }
-        comingSoonContainer.classList.remove('show');
-    } else {
-        errorElement.classList.remove('hidden');
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.remove('show');
-        menuContainer.classList.remove('show');
-        comingSoonContainer.classList.remove('show');
-        updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
-    }
+if (users.hasOwnProperty(username) && users[username].password === password) {
+localStorage.setItem('loggedInUsername', username);
+loggedInUsername = username;
+loginForm.classList.add('hidden');
+menuContainer.classList.add('show');
+errorElement.classList.add('hidden');
+if (username === 'admin') {
+adminUnitOptionsDiv.classList.add('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+updateLogoText('Pilih Unit');
+} else {
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.add('show');
+updateLogoText(users[username].nama);
+}
+comingSoonContainer.classList.remove('show');
+} else {
+errorElement.classList.remove('hidden');
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.remove('show');
+userOptionsDiv.classList.remove('show');
+menuContainer.classList.remove('show');
+comingSoonContainer.classList.remove('show');
+updateLogoText('PAMSIMAS KUJA');
+}
 }
 
 function showAdminUnitOptions() {
@@ -119,19 +95,14 @@ updateLogoText('Pilih Unit');
 }
 
 function showAdminOptions(unit) {
-    localStorage.setItem('selectedUnit', unit);
-    selectedUnit = unit;
-    adminUnitOptionsDiv.classList.remove('show');
-    adminOptionsDiv.classList.add('show');
-    userOptionsDiv.classList.remove('show');
-    comingSoonContainer.classList.remove('show');
-    
-    const namaUnit = users[unit] ? users[unit].nama : 'Admin';
-    updateLogoText(namaUnit);
-    
-    // Ganti logo sesuai unit
-    const logo = document.querySelector('.logo'); // Ambil elemen logo
-    logo.src = users[unit].logo; // Ganti dengan logo unit yang dipilih
+localStorage.setItem('selectedUnit', unit);
+selectedUnit = unit;
+adminUnitOptionsDiv.classList.remove('show');
+adminOptionsDiv.classList.add('show');
+userOptionsDiv.classList.remove('show');
+comingSoonContainer.classList.remove('show');
+const namaUnit = users[unit] ? users[unit].nama : 'Admin';
+updateLogoText(namaUnit);
 }
 
 function showUserOptions(unit) {
