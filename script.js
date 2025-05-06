@@ -1,9 +1,28 @@
 const users = {
-'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
-'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
-'margotirto': { password: 'giono', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', nama: 'Margo Tirto' },
-'admin': { password: 'khodari22', nama: 'Admin' }
-// Anda bisa menambahkan lebih banyak pengguna di sini
+    'tirtakusuma': { 
+        password: 'suciani', 
+        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', 
+        nama: 'Tirta Kusuma',
+        logo: 'tirtakusuma.png' // Logo untuk unit Tirta Kusuma
+    },
+    'tirtajaya': { 
+        password: 'suparno', 
+        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', 
+        nama: 'Tirta Jaya',
+        logo: 'tirtajaya.png' // Logo untuk unit Tirta Jaya
+    },
+    'margotirto': { 
+        password: 'giono', 
+        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', 
+        nama: 'Margo Tirto',
+        logo: 'margotirto.png' // Logo untuk unit Margo Tirto
+    },
+    'admin': { 
+        password: 'khodari22', 
+        nama: 'Admin',
+        logo: 'logo_admin.png' // Logo untuk admin
+    }
+    // Anda bisa menambahkan lebih banyak pengguna di sini
 };
 
 const loginForm = document.getElementById('loginForm');
