@@ -35,12 +35,13 @@
     }
 
     .logo {
+      display: block;
+      margin: 0 auto 12px auto;
       width: 110px;
-      margin-bottom: 12px;
+      user-select: none;
       transition: none;
       transform: none;
-      user-select: none;
-    }
+}
 
     h2 {
       font-weight: 600;
@@ -232,7 +233,7 @@
 
     <div id="menuContainer" class="hidden">
       <div id="adminUnitOptions" class="hidden">
-        <h3>Pilih Unit</h3>
+        <h3>Pilih Salah Satu</h3>
         <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
         <button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
         <button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
@@ -312,7 +313,7 @@
       logoTextElement.textContent = '';
 
       if (user === 'admin') {
-        logoTextElement.textContent = 'Pilih Salah Satu';
+        logoTextElement.textContent = 'Pilih Unit';
       } else if (user && users[user]) {
         // Ganti teks dengan logo kecil
         const img = document.createElement('img');
