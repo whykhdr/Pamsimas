@@ -169,17 +169,23 @@ button:active {
     }
 
     .logo {
-        width: 100px;
-        margin-bottom: 20px;
-        transition: none;
-        transform: none;
-    }
+    width: 130px;
+    margin-bottom: 10px; /* Ubah dari 28px menjadi 10px */
+    transition: transform 0.5s ease;
+    transform: rotate(0deg);
+}
 
-    h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        letter-spacing: 1px;
-    }
+h2 {
+    font-weight: 600;
+    font-size: 2.8em;
+    color: #222;
+    margin-top: 0; /* Pastikan margin atas diatur ke 0 */
+    margin-bottom: 28px; /* Tetap biarkan margin bawah sesuai kebutuhan */
+    letter-spacing: 1.3px;
+    text-shadow: 1px 1px 3px rgba(74, 144, 226, 0.25);
+}
+
+/* Tambahan CSS lainnya tetap sama */
 
     .form-group {
         margin-bottom: 35px;
