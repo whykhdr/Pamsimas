@@ -1,105 +1,103 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Arial', sans-serif;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #1E90FF; /* Warna biru laut */
-}
-
-.header {
-    background-color: #fff;
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-    width: 150px; /* Ukuran logo di header */
-    height: auto;
-}
-
-h2 {
-    margin: 10px 0;
+    background: linear-gradient(135deg, #1E90FF, #00BFFF); /* Gradasi biru */
 }
 
 .container {
-    background-color: #fff;
-    padding: 35px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Bayangan halus */
     width: 90%;
-    max-width: 600px;
-    margin-top: 20px;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s; /* Efek transisi saat hover */
+}
+
+.container:hover {
+    transform: scale(1.02); /* Efek zoom saat hover */
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #333; /* Warna teks judul */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 25px; /* Menambah jarak antar grup input */
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #555; /* Warna teks label */
 }
 
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s; /* Efek transisi border */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #1E90FF; /* Warna border saat fokus */
+    outline: none; /* Menghilangkan outline default */
 }
 
 button {
-    background-color: #4CAF50; /* Warna hijau */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
     width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #28a745; /* Warna hijau untuk tombol */
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Efek transisi */
 }
 
 button:hover {
-    background-color: #45a049; /* Warna hijau lebih gelap saat hover */
+    background-color: #218838; /* Warna hijau lebih gelap saat hover */
+    transform: translateY(-2px); /* Efek angkat saat hover */
 }
 
 .error-message {
     color: red;
     margin-top: 10px;
+    font-size: 0.9em;
 }
 
 .hidden {
-    display: none;
+    display: none; /* Menyembunyikan elemen */
+}
+
+.show {
+    display: block; /* Menampilkan elemen */
 }
 
 .coming-soon {
-    text-align: center;
     margin-top: 20px;
-}
-
-.kembali-button {
-    background-color: #f44336; /* Warna merah */
-}
-
-.kembali-button:hover {
-    background-color: #e53935; /* Warna merah lebih gelap saat hover */
-}
-
-.menu-button {
-    background-color: #2196F3; /* Warna biru */
-}
-
-.menu-button:hover {
-    background-color: #1976D2; /* Warna biru lebih gelap saat hover */
-}
-
-.logout-button {
-    background-color: #FF5722; /* Warna oranye */
-}
-
-.logout-button:hover {
-    background-color: #E64A19; /* Warna oranye lebih gelap saat hover */
+    font-size: 1.2em;
+    color: #555; /* Warna teks untuk coming soon */
 }
