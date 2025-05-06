@@ -11,16 +11,17 @@ body {
 .container {
     background-color: #ffffff;
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    border-radius: 20px; /* Lebih bulat */
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2); /* Bayangan lebih dalam */
     width: 90%;
     max-width: 400px;
     text-align: center;
-    transition: transform 0.3s; /* Efek transisi saat hover */
+    transition: transform 0.3s, box-shadow 0.3s; /* Efek transisi saat hover */
 }
 
 .container:hover {
-    transform: scale(1.02); /* Efek zoom saat hover */
+    transform: scale(1.05); /* Efek zoom saat hover */
+    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.3); /* Bayangan lebih dalam saat hover */
 }
 
 .logo {
@@ -34,6 +35,7 @@ h2 {
     margin-bottom: 20px;
     font-size: 2.5em;
     color: #333; /* Warna teks judul */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Efek bayangan pada teks */
 }
 
 .form-group {
@@ -56,13 +58,14 @@ input[type="password"] {
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 1em;
-    transition: border-color 0.3s; /* Efek transisi border */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Efek transisi border */
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
     border-color: #1E90FF; /* Warna border saat fokus */
     outline: none; /* Menghilangkan outline default */
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); /* Efek glow saat fokus */
 }
 
 button {
@@ -74,13 +77,14 @@ button {
     color: white;
     font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s; /* Efek transisi */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; /* Efek transisi */
     margin-top: 10px; /* Menambah jarak atas tombol */
 }
 
 button:hover {
     background-color: #218838; /* Warna hijau lebih gelap saat hover */
     transform: translateY(-2px); /* Efek angkat saat hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
 }
 
 .error-message {
@@ -101,4 +105,5 @@ button:hover {
     margin-top: 20px;
     font-size: 1.2em;
     color: #555; /* Warna teks untuk coming soon */
+    font-style: italic; /* Miring untuk menonjolkan */
 }
