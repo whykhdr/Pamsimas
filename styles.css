@@ -24,7 +24,7 @@ body {
     text-align: center;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     will-change: transform;
-    margin-bottom: 60px; /* spacing between containers */
+    margin-bottom: 60px;
 }
 
 .container:hover {
@@ -38,7 +38,7 @@ body {
     width: 130px;
     margin-bottom: 28px;
     transition: transform 0.5s ease;
-    transform: rotate(0deg); /* Remove any rotation */
+    transform: rotate(0deg);
 }
 
 h2 {
@@ -51,7 +51,7 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 50px; /* Increased spacing between groups */
+    margin-bottom: 50px;
     text-align: left;
 }
 
@@ -153,9 +153,54 @@ button:active {
     user-select: none;
 }
 
-@media (max-width: 768px) {
+/* RESPONSIVE - OPTIMIZED FOR MOBILE (max-width: 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 30px 20px;
+        max-width: 100%;
+        margin-bottom: 40px;
+        box-shadow:
+            0 6px 18px rgba(0, 0, 0, 0.12),
+            0 5px 15px rgba(74, 144, 226, 0.15);
+    }
+
     .logo {
-        width: 110px;
-        transform: rotate(0deg); /* Pastikan logo tidak miring di mobile */
+        width: 100px;
+        margin-bottom: 20px;
+        transition: none;
+        transform: none;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    .form-group {
+        margin-bottom: 35px;
+    }
+
+    label {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 1em;
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+
+    button {
+        font-size: 1.1em;
+        padding: 14px 0;
+        border-radius: 16px;
+        margin-top: 15px;
     }
 }
