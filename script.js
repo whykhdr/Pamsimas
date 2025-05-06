@@ -20,7 +20,7 @@ const users = {
     'admin': { 
         password: 'khodari22', 
         nama: 'Admin',
-        logo: 'logo_admin.png' // Logo untuk admin
+        logo: 'logo.png' // Logo untuk admin
     }
     // Anda bisa menambahkan lebih banyak pengguna di sini
 };
