@@ -24,7 +24,7 @@ body {
     text-align: center;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     will-change: transform;
-    margin-bottom: 40px; /* New: spacing between containers */
+    margin-bottom: 60px; /* Meningkatkan jarak antar container */
 }
 
 .container:hover {
@@ -54,13 +54,13 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 40px; /* Increased spacing between form groups */
+    margin-bottom: 50px; /* Meningkatkan jarak antar grup input */
     text-align: left;
 }
 
 label {
     display: block;
-    margin-bottom: 9px;
+    margin-bottom: 12px; /* Meningkatkan jarak antara label dan input */
     font-weight: 600;
     font-size: 1.15em;
     color: #444;
@@ -97,7 +97,6 @@ input[type="password"]:focus {
         0 0 8px rgba(74, 144, 226, 0.6),
         inset 2px 2px 8px #d6e4ff;
 }
-
 button {
     width: 100%;
     padding: 15px 0;
@@ -113,6 +112,7 @@ button {
         0 3px 6px rgba(24, 90, 157, 0.6);
     transition: background 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
     user-select: none;
+    margin-top: 20px; /* Menambah jarak atas tombol */
 }
 
 button:hover {
