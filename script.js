@@ -49,39 +49,39 @@ updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
 }
 
 function login() {
-const usernameInput = document.getElementById('username');
-const passwordInput = document.getElementById('password');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
 
-const username = usernameInput.value;
-const password = passwordInput.value;
+    const username = usernameInput.value;
+    const password = passwordInput.value;
 
-if (users.hasOwnProperty(username) && users[username].password === password) {
-localStorage.setItem('loggedInUsername', username);
-loggedInUsername = username;
-loginForm.classList.add('hidden');
-menuContainer.classList.add('show');
-errorElement.classList.add('hidden');
-if (username === 'admin') {
-adminUnitOptionsDiv.classList.add('show');
-adminOptionsDiv.classList.remove('show');
-userOptionsDiv.classList.remove('show');
-updateLogoText('Pilih Unit');
-} else {
-adminUnitOptionsDiv.classList.remove('show');
-adminOptionsDiv.classList.remove('show');
-userOptionsDiv.classList.add('show');
-updateLogoText(users[username].nama);
-}
-comingSoonContainer.classList.remove('show');
-} else {
-errorElement.classList.remove('hidden');
-adminUnitOptionsDiv.classList.remove('show');
-adminOptionsDiv.classList.remove('show');
-userOptionsDiv.classList.remove('show');
-menuContainer.classList.remove('show');
-comingSoonContainer.classList.remove('show');
-updateLogoText('PAMSIMAS KUJA');
-}
+    if (users.hasOwnProperty(username) && users[username].password === password) {
+        localStorage.setItem('loggedInUsername', username);
+        loggedInUsername = username;
+        loginForm.classList.add('hidden');
+        menuContainer.classList.add('show');
+        errorElement.classList.add('hidden');
+        if (username === 'admin') {
+            adminUnitOptionsDiv.classList.add('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.remove('show');
+            updateLogoText('Pilih Unit');
+        } else {
+            adminUnitOptionsDiv.classList.remove('show');
+            adminOptionsDiv.classList.remove('show');
+            userOptionsDiv.classList.add('show');
+            updateLogoText(users[username].nama);
+        }
+        comingSoonContainer.classList.remove('show');
+    } else {
+        errorElement.classList.remove('hidden');
+        adminUnitOptionsDiv.classList.remove('show');
+        adminOptionsDiv.classList.remove('show');
+        userOptionsDiv.classList.remove('show');
+        menuContainer.classList.remove('show');
+        comingSoonContainer.classList.remove('show');
+        updateLogoText('PAMSIMAS KUJA');
+    }
 }
 
 function showAdminUnitOptions() {
