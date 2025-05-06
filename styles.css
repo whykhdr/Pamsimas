@@ -44,7 +44,7 @@ label {
 
 input[type="text"],
 input[type="password"],
-button[type="submit"] {
+button {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -53,5 +53,32 @@ button[type="submit"] {
     font-size: 1.2em;
 }
 
-button[type="submit"] {
-    background-color: #28a745; /* Warna hijau untuk tombol login */
+button {
+    background-color: #28a745; /* Warna hijau untuk tombol */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838; /* Warna hijau lebih gelap saat hover */
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.coming-soon {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
