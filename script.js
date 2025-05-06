@@ -80,6 +80,11 @@ function login() {
         loginForm.classList.add('hidden');
         menuContainer.classList.add('show');
         errorElement.classList.add('hidden');
+
+        // Ganti logo sesuai pengguna
+        const logo = document.querySelector('.logo'); // Ambil elemen logo
+        logo.src = users[username].logo; // Ganti dengan logo admin
+
         if (username === 'admin') {
             adminUnitOptionsDiv.classList.add('show');
             adminOptionsDiv.classList.remove('show');
@@ -99,7 +104,7 @@ function login() {
         userOptionsDiv.classList.remove('show');
         menuContainer.classList.remove('show');
         comingSoonContainer.classList.remove('show');
-        updateLogoText('PAMSIMAS KUJA');
+        updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
     }
 }
 
@@ -114,14 +119,19 @@ updateLogoText('Pilih Unit');
 }
 
 function showAdminOptions(unit) {
-localStorage.setItem('selectedUnit', unit);
-selectedUnit = unit;
-adminUnitOptionsDiv.classList.remove('show');
-adminOptionsDiv.classList.add('show');
-userOptionsDiv.classList.remove('show');
-comingSoonContainer.classList.remove('show');
-const namaUnit = users[unit] ? users[unit].nama : 'Admin';
-updateLogoText(namaUnit);
+    localStorage.setItem('selectedUnit', unit);
+    selectedUnit = unit;
+    adminUnitOptionsDiv.classList.remove('show');
+    adminOptionsDiv.classList.add('show');
+    userOptionsDiv.classList.remove('show');
+    comingSoonContainer.classList.remove('show');
+    
+    const namaUnit = users[unit] ? users[unit].nama : 'Admin';
+    updateLogoText(namaUnit);
+    
+    // Ganti logo sesuai unit
+    const logo = document.querySelector('.logo'); // Ambil elemen logo
+    logo.src = users[unit].logo; // Ganti dengan logo unit yang dipilih
 }
 
 function showUserOptions(unit) {
