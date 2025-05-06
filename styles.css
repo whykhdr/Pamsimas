@@ -24,7 +24,7 @@ body {
     text-align: center;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     will-change: transform;
-    margin-bottom: 60px; /* Meningkatkan jarak antar container */
+    margin-bottom: 60px; /* spacing between containers */
 }
 
 .container:hover {
@@ -38,10 +38,7 @@ body {
     width: 130px;
     margin-bottom: 28px;
     transition: transform 0.5s ease;
-}
-
-.container:hover .logo {
-    transform: rotate(10deg);
+    transform: rotate(0deg); /* Remove any rotation */
 }
 
 h2 {
@@ -54,13 +51,13 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 50px; /* Meningkatkan jarak antar grup input */
+    margin-bottom: 50px; /* Increased spacing between groups */
     text-align: left;
 }
 
 label {
     display: block;
-    margin-bottom: 12px; /* Meningkatkan jarak antara label dan input */
+    margin-bottom: 12px;
     font-weight: 600;
     font-size: 1.15em;
     color: #444;
@@ -97,6 +94,7 @@ input[type="password"]:focus {
         0 0 8px rgba(74, 144, 226, 0.6),
         inset 2px 2px 8px #d6e4ff;
 }
+
 button {
     width: 100%;
     padding: 15px 0;
@@ -112,7 +110,7 @@ button {
         0 3px 6px rgba(24, 90, 157, 0.6);
     transition: background 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
     user-select: none;
-    margin-top: 20px; /* Menambah jarak atas tombol */
+    margin-top: 20px;
 }
 
 button:hover {
@@ -153,4 +151,11 @@ button:active {
     font-style: italic;
     letter-spacing: 0.8px;
     user-select: none;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 110px;
+        transform: rotate(0deg); /* Pastikan logo tidak miring di mobile */
+    }
 }
