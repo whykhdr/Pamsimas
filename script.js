@@ -1,4 +1,3 @@
-</script>
 const users = {
 'tirtakusuma': { password: 'suciani', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', nama: 'Tirta Kusuma' },
 'tirtajaya': { password: 'suparno', pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', nama: 'Tirta Jaya' },
@@ -180,4 +179,3 @@ document.getElementById('username').value = '';
 document.getElementById('password').value = '';
 updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
 }
-</script>
