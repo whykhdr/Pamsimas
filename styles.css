@@ -12,7 +12,7 @@ body {
     background-color: #fff;
     padding: 35px;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Menambahkan shadow */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
     width: 98%;
     max-width: 500px;
     text-align: center;
@@ -22,7 +22,6 @@ body {
     width: 150px;
     height: auto;
     margin-bottom: 20px;
-    border-radius: 0%;
 }
 
 h2 {
@@ -71,11 +70,11 @@ button:hover {
 }
 
 .hidden {
-    display: none;
+    display: none; /* Menyembunyikan elemen */
 }
 
 .show {
-    display: block;
+    display: block; /* Menampilkan elemen */
 }
 
 .coming-soon {
