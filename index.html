@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PAMSIMAS KUJA</title>
-    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Tautan ke file CSS -->
+    <link rel="stylesheet" type="text/css" href="styles.css" /> <!-- Tautan ke file CSS -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
@@ -37,13 +37,14 @@
 
         .logo {
             width: 130px;
-            margin-bottom: 28px;
+            margin-bottom: 12px; /* Dikurangi agar logo lebih dekat ke header */
         }
 
         h2 {
             font-weight: 600;
             font-size: 2.5em;
             color: #222;
+            margin-top: 0; /* Pastikan header tidak ada margin atas */
             margin-bottom: 20px;
         }
 
@@ -132,6 +133,7 @@
 
             .logo {
                 width: 100px;
+                margin-bottom: 12px; /* Sesuaikan juga di mobile */
             }
 
             h2 {
@@ -169,24 +171,24 @@
 </head>
 <body>
     <div class="container">
-        <img src="logo.png" alt="Logo PAMSIMAS KUJA" class="logo"> <!-- Gambar logo -->
+        <img src="logo.png" alt="Logo PAMSIMAS KUJA" class="logo" />
         <h2>PAMSIMAS KUJA</h2>
 
         <div id="loginForm">
             <p class="login-description">Silakan masukkan username dan password Anda.</p>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required> <!-- Input untuk username -->
+                <input type="text" id="username" name="username" required />
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required> <!-- Input untuk password -->
+                <input type="password" id="password" name="password" required />
             </div>
-            <button type="button" onclick="login()">Login</button> <!-- Tombol login -->
-            <p id="error" class="error-message hidden">Username atau password salah.</p> <!-- Pesan kesalahan -->
+            <button type="button" onclick="login()">Login</button>
+            <p id="error" class="error-message hidden">Username atau password salah.</p>
         </div>
 
-        <div id="menuContainer" class="hidden"> <!-- Kontainer menu yang tersembunyi -->
+        <div id="menuContainer" class="hidden">
             <div id="adminUnitOptions" class="hidden">
                 <h3>Pilih Unit</h3>
                 <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
@@ -216,6 +218,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script> <!-- Tautan ke file JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
