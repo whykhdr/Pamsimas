@@ -45,7 +45,7 @@ menuContainer.classList.remove('show');
 adminUnitOptionsDiv.classList.remove('show');
 adminOptionsDiv.classList.remove('show');
 userOptionsDiv.classList.remove('show');
-updateLogoText('PAMSIMAS KUJA'); // Teks default saat belum login
+updateLogoText('PAMSIMAS KUAMANG JAYA'); // Teks default saat belum login
 }
 
 function login() {
@@ -80,7 +80,7 @@ adminOptionsDiv.classList.remove('show');
 userOptionsDiv.classList.remove('show');
 menuContainer.classList.remove('show');
 comingSoonContainer.classList.remove('show');
-updateLogoText('PAMSIMAS KUJA');
+updateLogoText('PAMSIMAS KUAMANG JAYA');
 }
 }
 
@@ -177,5 +177,5 @@ comingSoonContainer.classList.remove('show');
 loginForm.classList.remove('hidden');
 document.getElementById('username').value = '';
 document.getElementById('password').value = '';
-updateLogoText('PAMSIMAS KUJA'); // Kembalikan teks logo ke default
+updateLogoText('PAMSIMAS KUAMANG JAYA'); // Kembalikan teks logo ke default
 }
