@@ -1,20 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Margo Tirto</title>
-<style>
-body { font-family: Arial, sans-serif; max-width: 480px; margin: 2rem auto; padding: 1rem; background: #f7f9fc; color: #333; }
-form { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-label { display: block; margin-top: 1rem; font-weight: bold; color: #0a9396; }
-input[type="text"], textarea, select { width: 100%; padding: 0.5rem; border: 1.5px solid #94d2bd; border-radius: 4px; font-size: 1rem; box-sizing: border-box; }
-input[type="radio"], input[type="checkbox"] { margin-right: 0.5rem; }
-.options-group { margin-left: 1rem; margin-top: 0.3rem; }
-.description { font-size: 0.875rem; color: #666; margin-top: 0.25rem; font-style: italic; }
-button { margin-top: 1.5rem; background-color: #0a9396; color: white; border: none; padding: 0.7rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; width: 100%; }
-button:hover { background-color: #007f70; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Margo Tirto</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #e9f5f5;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0a9396;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #0a9396;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1.5px solid #94d2bd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007f70;
+            outline: none;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #007f70;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            form {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
 <h1>MARGO TIRTO</h1>
