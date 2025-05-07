@@ -1,42 +1,79 @@
 const users = {
-      'tirtakusuma': {
-        password: 'suciani', 
-        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', 
-        nama: 'Tirta Kusuma', 
-        logo: 'Logo/tirtakusuma.png'
-      },
-      'tirtajaya': {
-        password: 'suparno', 
-        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', 
-        nama: 'Tirta Jaya', 
-        logo: 'Logo/tirtajaya.png'
-      },
-      'margotirto': {
-        password: 'giono', 
-        pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', 
-        nama: 'Margo Tirto', 
-        logo: 'Logo/margotirto.png'
-      },
-      'admin': {
-        password: 'khodari22', 
-        nama: 'Admin'
-      }
-    };
+  'tirtakusuma': {
+    password: 'suciani', 
+    pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeNhpNqjhvrYxOOOyQzr2BzGIZC8zc6duN3nT2yVm3nF5xpuA/closedform', 
+    nama: 'Tirta Kusuma', 
+    logo: 'Logo/tirtakusuma.png'
+  },
+  'tirtajaya': {
+    password: 'suparno', 
+    pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSefK0cNmlpwbP2Eu-5JkbuJAdxplR0SUzSx8MqWZk2Yl5XysQ/viewform', 
+    nama: 'Tirta Jaya', 
+    logo: 'Logo/tirtajaya.png'
+  },
+  'margotirto': {
+    password: 'giono', 
+    pengecekanLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc2kZjZ2dfdy8dVOy3bEEu6260B5P6FZ4RPJfqQEXpGwq8wqQ/viewform', 
+    nama: 'Margo Tirto', 
+    logo: 'Logo/margotirto.png'
+  },
+  'admin': {
+    password: 'khodari22', 
+    nama: 'Admin'
+  }
+};
 
-    const loginForm = document.getElementById('loginForm');
-    const menuContainer = document.getElementById('menuContainer');
-    const errorElement = document.getElementById('error');
-    const comingSoonContainer = document.getElementById('comingSoonContainer');
-    const comingSoonTextElement = document.getElementById('comingSoonText');
-    const adminUnitOptionsDiv = document.getElementById('adminUnitOptions');
-    const adminOptionsDiv = document.getElementById('adminOptions');
-    const userOptionsDiv = document.getElementById('userOptions');
-    const logoTextElement = document.querySelector('.container h2');
-    const topLogo = document.getElementById('topLogo');
+const loginForm = document.getElementById('loginForm');
+const menuContainer = document.getElementById('menuContainer');
+const errorElement = document.getElementById('error');
+const comingSoonContainer = document.getElementById('comingSoonContainer');
+const comingSoonTextElement = document.getElementById('comingSoonText');
+const adminUnitOptionsDiv = document.getElementById('adminUnitOptions');
+const adminOptionsDiv = document.getElementById('adminOptions');
+const userOptionsDiv = document.getElementById('userOptions');
+const logoTextElement = document.querySelector('.container h2');
+const topLogo = document.getElementById('topLogo');
 
-    let loggedInUsername = localStorage.getItem('loggedInUsername');
-    let selectedUnit = localStorage.getItem('selectedUnit');
+// Ambil elemen input
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
 
+// Tambahkan event listener untuk mendeteksi tombol "Enter"
+usernameInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    login(); // Panggil fungsi login jika "Enter" ditekan
+  }
+});
+
+passwordInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    login(); // Panggil fungsi login jika "Enter" ditekan
+  }
+});
+
+// Fungsi login
+function login() {
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  if (users.hasOwnProperty(username) && users[username].password === password) {
+    localStorage.setItem('loggedInUsername', username);
+    loggedInUsername = username;
+    loginForm.classList.add('hidden');
+    menuContainer.classList.add('show');
+    errorElement.classList.add('hidden');
+    if (username === 'admin') {
+      adminUnitOptionsDiv.classList.add('show');
+    } else {
+      userOptionsDiv.classList.add('show');
+    }
+    updateLogo(username);
+  } else {
+    errorElement.classList.remove('hidden');
+  }
+}
+
+// Fungsi untuk memperbarui logo
 function updateLogo(user) {
   if (loggedInUsername) {
     topLogo.style.display = 'none';
@@ -60,153 +97,28 @@ function updateLogo(user) {
   }
 }
 
+// Fungsi untuk logout
+function logout() {
+  localStorage.removeItem('loggedInUsername');
+  loggedInUsername = null;
+  loginForm.classList.remove('hidden');
+  menuContainer.classList.remove('show');
+  errorElement.classList.add('hidden');
+  logoTextElement.textContent = 'PAMSIMAS KUAMANG JAYA';
+}
 
-    if (loggedInUsername) {
-      loginForm.classList.add('hidden');
-      menuContainer.classList.add('show');
-      if (loggedInUsername === 'admin') {
-        adminUnitOptionsDiv.classList.add('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.remove('show');
-        updateLogo('admin');
-      } else {
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.add('show');
-        updateLogo(loggedInUsername);
-      }
-    } else {
-      loginForm.classList.remove('hidden');
-      menuContainer.classList.remove('show');
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      updateLogo(null);
-    }
-
-    function login() {
-      const usernameInput = document.getElementById('username');
-      const passwordInput = document.getElementById('password');
-      const username = usernameInput.value;
-      const password = passwordInput.value;
-
-      if (users.hasOwnProperty(username) && users[username].password === password) {
-        localStorage.setItem('loggedInUsername', username);
-        loggedInUsername = username;
-        loginForm.classList.add('hidden');
-        menuContainer.classList.add('show');
-        errorElement.classList.add('hidden');
-        if (username === 'admin') {
-          adminUnitOptionsDiv.classList.add('show');
-          adminOptionsDiv.classList.remove('show');
-          userOptionsDiv.classList.remove('show');
-          updateLogo('admin');
-        } else {
-          adminUnitOptionsDiv.classList.remove('show');
-          adminOptionsDiv.classList.remove('show');
-          userOptionsDiv.classList.add('show');
-          updateLogo(username);
-        }
-        comingSoonContainer.classList.remove('show');
-      } else {
-        errorElement.classList.remove('hidden');
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.remove('show');
-        menuContainer.classList.remove('show');
-        comingSoonContainer.classList.remove('show');
-        updateLogo(null);
-      }
-    }
-
-    function showAdminUnitOptions() {
-      adminUnitOptionsDiv.classList.add('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.remove('show');
-      localStorage.removeItem('selectedUnit');
-      selectedUnit = null;
-      updateLogo('admin');
-    }
-
-    function showAdminOptions(unit) {
-      localStorage.setItem('selectedUnit', unit);
-      selectedUnit = unit;
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.add('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.remove('show');
-      updateLogo(unit);
-    }
-
-    function showUserOptions(unit) {
-      localStorage.setItem('selectedUnit', unit);
-      selectedUnit = unit;
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.add('show');
-      comingSoonContainer.classList.remove('show');
-      updateLogo(loggedInUsername);
-    }
-
-    function goToPengecekan() {
-      if (loggedInUsername) {
-        let link = null;
-        if (loggedInUsername === 'admin' && selectedUnit) {
-          link = users[selectedUnit] ? users[selectedUnit].pengecekanLink : null;
-        } else if (loggedInUsername !== 'admin') {
-          link = users[loggedInUsername] ? users[loggedInUsername].pengecekanLink : null;
-        }
-
-        if (link) {
-          window.location.href = link;
-        } else {
-          alert('Link Input Data Penggunaan tidak ditemukan.');
-        }
-      } else {
-        alert('Anda belum login.');
-      }
-    }
-
-    function showComingSoon(feature) {
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.add('show');
-      if (feature === 'standAwal') {
-        comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
-      } else if (feature === 'srBaru') {
-        comingSoonTextElement.textContent = 'Fitur Penambahan SR Baru - Coming Soon';
-      }
-    }
-
-    function hideComingSoon() {
-      comingSoonContainer.classList.remove('show');
-      if (loggedInUsername === 'admin') {
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.add('show');
-        userOptionsDiv.classList.remove('show');
-        updateLogo(selectedUnit || 'admin');
-      } else {
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.add('show');
-        updateLogo(loggedInUsername);
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem('loggedInUsername');
-      localStorage.removeItem('selectedUnit');
-      loggedInUsername = null;
-      selectedUnit = null;
-      menuContainer.classList.remove('show');
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.remove('show');
-      loginForm.classList.remove('hidden');
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
-      updateLogo(null);
-    }
+// Inisialisasi
+let loggedInUsername = localStorage.getItem('loggedInUsername');
+if (loggedInUsername) {
+  loginForm.classList.add('hidden');
+  menuContainer.classList.add('show');
+  updateLogo(loggedInUsername);
+  if (loggedInUsername === 'admin') {
+    adminUnitOptionsDiv.classList.add('show');
+  } else {
+    userOptionsDiv.classList.add('show');
+  }
+} else {
+  loginForm.classList.remove('hidden');
+  menuContainer.classList.remove('show');
+}
