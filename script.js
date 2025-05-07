@@ -37,29 +37,29 @@ const users = {
     let loggedInUsername = localStorage.getItem('loggedInUsername');
     let selectedUnit = localStorage.getItem('selectedUnit');
 
-    function updateLogo(user) {
-      if (loggedInUsername) {
-        topLogo.style.display = 'none';
-      } else {
-        topLogo.style.display = 'block';
-      }
+function updateLogo(user) {
+  if (loggedInUsername) {
+    topLogo.style.display = 'none';
+  } else {
+    topLogo.style.display = 'block';
+  }
 
-      logoTextElement.textContent = '';
+  logoTextElement.textContent = '';
 
-      if (user === 'admin') {
-        logoTextElement.textContent = 'Pilih Unit';
-      } else if (user && users[user]) {
-        // Ganti teks dengan logo kecil
-        const img = document.createElement('img');
-        img.src = users[user].logo;
-        img.alt = users[user].nama;
-        img.style.maxHeight = '50px';
-        img.style.objectFit = 'contain';
-        logoTextElement.appendChild(img);
-      } else {
-        logoTextElement.textContent = 'PAMSIMAS KUAMANG JAYA';
-      }
-    }
+  if (user === 'admin') {
+    logoTextElement.textContent = 'Pilih Unit';
+  } else if (user && users[user]) {
+    const img = document.createElement('img');
+    img.src = users[user].logo; // Pastikan ini mengarah ke path yang benar
+    img.alt = users[user].nama;
+    img.style.maxHeight = '100px'; // Ukuran logo diperbesar
+    img.style.objectFit = 'contain';
+    logoTextElement.appendChild(img);
+  } else {
+    logoTextElement.textContent = 'PAMSIMAS KUAMANG JAYA';
+  }
+}
+
 
     if (loggedInUsername) {
       loginForm.classList.add('hidden');
