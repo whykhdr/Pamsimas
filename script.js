@@ -13,7 +13,7 @@ const users = {
       },
       'margotirto': {
         password: 'giono', 
-        pengecekanLink: 'https://www.pamsimaskuja.my.id/Form/margotirto.html', 
+        pengecekanLink: 'https://forms.gle/t9XHW61KJ3zJttby6', 
         nama: 'Margo Tirto', 
         logo: 'Logo/margotirto.png'
       },
