@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PAMSIMAS KUAMANG JAYA</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PAMSIMAS KUAMANG JAYA</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Logo PAMSIMAS KUAMANG JAYA" class="logo" id="topLogo" />
-    <h2>PAMSIMAS KUAMANG JAYA</h2>
+  <div class="container">
+    <img src="logo.png" alt="Logo PAMSIMAS KUAMANG JAYA" class="logo" id="topLogo" />
+    <h2>PAMSIMAS KUAMANG JAYA</h2>
 
-    <div id="loginForm">
-      <p class="login-description">Silakan masukkan username dan password Anda.</p>
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <button type="button" onclick="login()">Login</button>
-      <p id="error" class="error-message hidden">Username atau password salah.</p>
-    </div>
+    <div id="loginForm">
+      <p class="login-description">Silakan masukkan username dan password Anda.</p>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+       </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="button" onclick="login()">Login</button>
+      <p id="error" class="error-message hidden">Username atau password salah.</p>
+    </div>
 
-    <div id="menuContainer" class="hidden">
-      <div id="adminUnitOptions" class="hidden">
-        <h3>Pilih Salah Satu</h3>
-        <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
-        <button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
-        <button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
-        <button class="logout-button" onclick="logout()">Log Out</button>
-      </div>
+    <div id="menuContainer" class="hidden">
+      <div id="adminUnitOptions" class="hidden">
+        <h3>Pilih Salah Satu</h3>
+        <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
+        <button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
+        <button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
+        <button class="logout-button" onclick="logout()">Log Out</button>
+      </div>
 
-      <div id="adminOptions" class="hidden">
-        <h3>Pilihan Admin</h3>
-        <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-        <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
-        <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-        <button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
-      </div>
+      <div id="adminOptions" class="hidden">
+        <h3>Pilihan Admin</h3>
+        <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+                <button class="menu-button" onclick="window.location.href='Kwitansi/tirtakusuma.html'">Cetak Kwitansi</button>
+        <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+        <button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
+      </div>
 
-      <div id="userOptions" class="hidden">
-        <h3>Pilihan</h3>
-        <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-        <button class="menu-button" onclick="showComingSoon('standAwal')">Lihat Stand Awal</button>
-        <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-        <button class="logout-button" onclick="logout()">Log Out</button>
-      </div>
-    </div>
+      <div id="userOptions" class="hidden">
+        <h3>Pilihan</h3>
+        <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+                <button class="menu-button" onclick="window.location.href='Kwitansi/tirtakusuma.html'">Cetak Kwitansi</button>
+        <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+        <button class="logout-button" onclick="logout()">Log Out</button>
+      </div>
+    </div>
 
-    <div id="comingSoonContainer" class="coming-soon hidden">
-      <p id="comingSoonText"></p>
-      <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
-    </div>
-  </div>
+    <div id="comingSoonContainer" class="coming-soon hidden">
+      <p id="comingSoonText"></p>
+      <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
+    </div>
+  </div>
 
-  <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
