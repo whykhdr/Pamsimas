@@ -4,12 +4,14 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* Mengubah 'center' menjadi 'flex-start' untuk memungkinkan konten yang lebih tinggi mengalir dan memberi ruang nafas dari atas */
+  align-items: flex-start; 
   min-height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, #4A90E2, #50E3C2);
   overflow-x: hidden;
-  padding: 15px 10px;
+  /* Menambahkan padding-top yang cukup (40px) agar tidak menempel ke tepi atas */
+  padding: 40px 10px 15px 10px; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,8 +26,8 @@ body {
   text-align: center;
   transition: none;
   will-change: auto;
-  /* Mengganti margin: 0 auto; dengan margin vertikal 5vh */
-  margin: 5vh auto; 
+  /* Mengatur margin kembali ke 0 auto agar centering horizontal dilakukan dengan andal */
+  margin: 0 auto; 
 }
 
 /* ⭐ TAMBAHKAN: Aturan untuk memastikan teks deskripsi berada di dalam kotak login */
