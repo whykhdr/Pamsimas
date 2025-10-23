@@ -63,32 +63,32 @@ function updateLogo(user) {
 
     if (loggedInUsername) {
       loginForm.classList.add('hidden');
-      menuContainer.classList.add('show');
+      menuContainer.classList.remove('hidden'); // Mengubah 'show' menjadi 'hidden'/'remove'
       if (loggedInUsername === 'admin') {
         if (selectedUnit) {
           // Admin sudah memilih unit
-          adminUnitOptionsDiv.classList.remove('show');
-          adminOptionsDiv.classList.add('show');
+          adminUnitOptionsDiv.classList.add('hidden');
+          adminOptionsDiv.classList.remove('hidden');
           updateLogo(selectedUnit);
         } else {
           // Admin belum memilih unit
-          adminUnitOptionsDiv.classList.add('show');
+          adminUnitOptionsDiv.classList.remove('hidden');
           updateLogo('admin');
         }
-        userOptionsDiv.classList.remove('show');
+        userOptionsDiv.classList.add('hidden');
       } else {
         // User biasa
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.add('show');
+        adminUnitOptionsDiv.classList.add('hidden');
+        adminOptionsDiv.classList.add('hidden');
+        userOptionsDiv.classList.remove('hidden');
         updateLogo(loggedInUsername);
       }
     } else {
       loginForm.classList.remove('hidden');
-      menuContainer.classList.remove('show');
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
+      menuContainer.classList.add('hidden');
+      adminUnitOptionsDiv.classList.add('hidden');
+      adminOptionsDiv.classList.add('hidden');
+      userOptionsDiv.classList.add('hidden');
       updateLogo(null);
     }
 
@@ -102,31 +102,31 @@ function updateLogo(user) {
         localStorage.setItem('loggedInUsername', username);
         loggedInUsername = username;
         loginForm.classList.add('hidden');
-        menuContainer.classList.add('show');
+        menuContainer.classList.remove('hidden');
         errorElement.classList.add('hidden');
         
         if (username === 'admin') {
-          adminUnitOptionsDiv.classList.add('show');
-          adminOptionsDiv.classList.remove('show');
-          userOptionsDiv.classList.remove('show');
+          adminUnitOptionsDiv.classList.remove('hidden');
+          adminOptionsDiv.classList.add('hidden');
+          userOptionsDiv.classList.add('hidden');
           updateLogo('admin');
         } else {
           // Set selectedUnit untuk user non-admin agar bisa digunakan di goToCetakKwitansi
           localStorage.setItem('selectedUnit', username); 
           selectedUnit = username;
-          adminUnitOptionsDiv.classList.remove('show');
-          adminOptionsDiv.classList.remove('show');
-          userOptionsDiv.classList.add('show');
+          adminUnitOptionsDiv.classList.add('hidden');
+          adminOptionsDiv.classList.add('hidden');
+          userOptionsDiv.classList.remove('hidden');
           updateLogo(username);
         }
-        comingSoonContainer.classList.remove('show');
+        comingSoonContainer.classList.add('hidden');
       } else {
         errorElement.classList.remove('hidden');
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.remove('show');
-        menuContainer.classList.remove('show');
-        comingSoonContainer.classList.remove('show');
+        adminUnitOptionsDiv.classList.add('hidden');
+        adminOptionsDiv.classList.add('hidden');
+        userOptionsDiv.classList.add('hidden');
+        menuContainer.classList.add('hidden');
+        comingSoonContainer.classList.add('hidden');
         updateLogo(null);
       }
     }
@@ -146,7 +146,7 @@ function goToCetakKwitansi() {
     }
 
     if (unitKey && users.hasOwnProperty(unitKey)) {
-        // Nama file adalah unitKey itu sendiri (misal: 'tirtakusuma' -> tirtakusuma.html)
+        // Tautan dinamis ke folder Kwitansi/ dengan nama unit yang sesuai
         window.location.href = `Kwitansi/${unitKey}.html`;
     } else {
         alert('Tidak dapat mengidentifikasi unit untuk Cetak Kwitansi. Silakan login kembali atau pilih unit (untuk Admin).');
@@ -155,10 +155,10 @@ function goToCetakKwitansi() {
 // ----------------------------------------------------------------------------------
 
     function showAdminUnitOptions() {
-      adminUnitOptionsDiv.classList.add('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.remove('show');
+      adminUnitOptionsDiv.classList.remove('hidden');
+      adminOptionsDiv.classList.add('hidden');
+      userOptionsDiv.classList.add('hidden');
+      comingSoonContainer.classList.add('hidden');
       localStorage.removeItem('selectedUnit');
       selectedUnit = null;
       updateLogo('admin');
@@ -167,21 +167,21 @@ function goToCetakKwitansi() {
     function showAdminOptions(unit) {
       localStorage.setItem('selectedUnit', unit);
       selectedUnit = unit;
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.add('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.remove('show');
+      adminUnitOptionsDiv.classList.add('hidden');
+      adminOptionsDiv.classList.remove('hidden');
+      userOptionsDiv.classList.add('hidden');
+      comingSoonContainer.classList.add('hidden');
       updateLogo(unit);
     }
 
     function showUserOptions(unit) {
-      // Fungsi ini sepertinya tidak dipanggil dari menu, tapi logikanya sudah benar
+      // Fungsi ini mungkin tidak lagi diperlukan karena login langsung mengarahkan user
       localStorage.setItem('selectedUnit', unit);
       selectedUnit = unit;
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.add('show');
-      comingSoonContainer.classList.remove('show');
+      adminUnitOptionsDiv.classList.add('hidden');
+      adminOptionsDiv.classList.add('hidden');
+      userOptionsDiv.classList.remove('hidden');
+      comingSoonContainer.classList.add('hidden');
       updateLogo(loggedInUsername);
     }
 
@@ -205,10 +205,10 @@ function goToCetakKwitansi() {
     }
 
     function showComingSoon(feature) {
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.add('show');
+      adminUnitOptionsDiv.classList.add('hidden');
+      adminOptionsDiv.classList.add('hidden');
+      userOptionsDiv.classList.add('hidden');
+      comingSoonContainer.classList.remove('hidden');
       if (feature === 'standAwal') {
         comingSoonTextElement.textContent = 'Fitur Lihat Stand Awal - Coming Soon';
       } else if (feature === 'srBaru') {
@@ -217,21 +217,21 @@ function goToCetakKwitansi() {
     }
 
     function hideComingSoon() {
-      comingSoonContainer.classList.remove('show');
+      comingSoonContainer.classList.add('hidden');
       if (loggedInUsername === 'admin') {
         if (selectedUnit) {
-          adminUnitOptionsDiv.classList.remove('show');
-          adminOptionsDiv.classList.add('show');
+          adminUnitOptionsDiv.classList.add('hidden');
+          adminOptionsDiv.classList.remove('hidden');
         } else {
-          adminUnitOptionsDiv.classList.add('show');
-          adminOptionsDiv.classList.remove('show');
+          adminUnitOptionsDiv.classList.remove('hidden');
+          adminOptionsDiv.classList.add('hidden');
         }
-        userOptionsDiv.classList.remove('show');
+        userOptionsDiv.classList.add('hidden');
         updateLogo(selectedUnit || 'admin');
       } else {
-        adminUnitOptionsDiv.classList.remove('show');
-        adminOptionsDiv.classList.remove('show');
-        userOptionsDiv.classList.add('show');
+        adminUnitOptionsDiv.classList.add('hidden');
+        adminOptionsDiv.classList.add('hidden');
+        userOptionsDiv.classList.remove('hidden');
         updateLogo(loggedInUsername);
       }
     }
@@ -241,11 +241,11 @@ function goToCetakKwitansi() {
       localStorage.removeItem('selectedUnit');
       loggedInUsername = null;
       selectedUnit = null;
-      menuContainer.classList.remove('show');
-      adminUnitOptionsDiv.classList.remove('show');
-      adminOptionsDiv.classList.remove('show');
-      userOptionsDiv.classList.remove('show');
-      comingSoonContainer.classList.remove('show');
+      menuContainer.classList.add('hidden');
+      adminUnitOptionsDiv.classList.add('hidden');
+      adminOptionsDiv.classList.add('hidden');
+      userOptionsDiv.classList.add('hidden');
+      comingSoonContainer.classList.add('hidden');
       loginForm.classList.remove('hidden');
       document.getElementById('username').value = '';
       document.getElementById('password').value = '';
