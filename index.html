@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Logo PAMSIMAS KUAMANG JAYA" class="logo" id="topLogo" />
+  <main class="container">     <img src="logo.png" alt="Logo PAMSIMAS KUAMANG JAYA" class="logo" id="topLogo" />
     <h2>PAMSIMAS KUAMANG JAYA</h2>
 
     <div id="loginForm">
@@ -21,41 +20,41 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required />
       </div>
-      <button type="button" onclick="login()">Login</button>
+      <button type="button" class="btn" onclick="login()">Login</button>
       <p id="error" class="error-message hidden">Username atau password salah.</p>
     </div>
 
     <div id="menuContainer" class="hidden">
       <div id="adminUnitOptions" class="hidden">
         <h3>Pilih Salah Satu</h3>
-        <button class="admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
-        <button class="admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
-        <button class="admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
-        <button class="logout-button" onclick="logout()">Log Out</button>
+        <button class="btn admin-unit-button" onclick="showAdminOptions('tirtakusuma')">Tirta Kusuma</button>
+        <button class="btn admin-unit-button" onclick="showAdminOptions('tirtajaya')">Tirta Jaya</button>
+        <button class="btn admin-unit-button" onclick="showAdminOptions('margotirto')">Margo Tirto</button>
+        <button class="btn logout-button" onclick="logout()">Log Out</button>
       </div>
 
       <div id="adminOptions" class="hidden">
         <h3>Pilihan Admin</h3>
-        <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-                <button class="menu-button" onclick="goToCetakKwitansi()">Cetak Kwitansi</button>
-        <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-        <button class="kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
+        <button class="btn menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+        <button class="btn menu-button" onclick="goToCetakKwitansi()">Cetak Kwitansi</button>
+        <button class="btn menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+        <button class="btn kembali-button" onclick="showAdminUnitOptions()">Kembali</button>
       </div>
 
       <div id="userOptions" class="hidden">
         <h3>Pilihan</h3>
-        <button class="menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
-                <button class="menu-button" onclick="goToCetakKwitansi()">Cetak Kwitansi</button>
-        <button class="menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
-        <button class="logout-button" onclick="logout()">Log Out</button>
+        <button class="btn menu-button" onclick="goToPengecekan()">Input Data Penggunaan</button>
+        <button class="btn menu-button" onclick="goToCetakKwitansi()">Cetak Kwitansi</button>
+        <button class="btn menu-button" onclick="showComingSoon('srBaru')">Penambahan SR Baru</button>
+        <button class="btn logout-button" onclick="logout()">Log Out</button>
       </div>
     </div>
 
     <div id="comingSoonContainer" class="coming-soon hidden">
       <p id="comingSoonText"></p>
-      <button class="kembali-button" onclick="hideComingSoon()">Kembali</button>
+      <button class="btn kembali-button" onclick="hideComingSoon()">Kembali</button>
     </div>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
