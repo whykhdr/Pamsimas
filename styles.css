@@ -24,9 +24,8 @@ body {
   text-align: center;
   transition: none;
   will-change: auto;
-  /* 🗑️ HILANGKAN margin-bottom: 40px; */
-  /* Menggunakan margin: 0 auto; untuk memastikan pemusatan horizontal */
-  margin: 0 auto; 
+  /* Mengganti margin: 0 auto; dengan margin vertikal 5vh */
+  margin: 5vh auto; 
 }
 
 /* ⭐ TAMBAHKAN: Aturan untuk memastikan teks deskripsi berada di dalam kotak login */
@@ -167,7 +166,7 @@ button:active {
   .container {
     padding: 25px 15px;
     max-width: 100%;
-    margin-bottom: 30px;
+    margin: 3vh auto; /* Mengganti margin-bottom: 30px; dengan margin vertikal 3vh */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border-radius: 15px;
   }
