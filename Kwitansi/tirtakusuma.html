@@ -284,11 +284,20 @@
             const Nama_Pelanggan = getCellVal(row, 1); 
             const Stand_Awal = getCellVal(row, 2); 
             const Stand_Akhir = getCellVal(row, 3); 
-            const Jumlah_Pemakaian = getCellVal(row, 4); 
+            const Jumlah_Pemakaian = getCellVal(row, 4); // Ini tetap string, dipakai di Rincian Pemakaian
             const Pokok_Beban = getCellVal(row, 5); 
-            const Tarif_Ixuan = getCellVal(row, 6); 
+            // const Tarif_Ixuan = getCellVal(row, 6); // Tidak dipakai, akan dikalkulasi
             const Jumlah_Bayar = getCellVal(row, 8); 
             const Alamat_Rumah = getCellVal(row, 9); 
+            
+            // --- (PERUBAHAN) Kalkulasi Iuran dinamis ---
+            // 1. Ubah string pemakaian (cth: "10" atau "10.0") menjadi angka
+            const pemakaianAngka = parseFloat(Jumlah_Pemakaian.replace(',', '.')) || 0;
+            // 2. Hitung iuran
+            const iuranCalculated = pemakaianAngka * 2000;
+            // 3. Format menjadi string mata uang (e.g., "20.000")
+            const Tarif_Iuran_Baru_Formatted = new Intl.NumberFormat('id-ID').format(iuranCalculated);
+            // --- Akhir Perubahan ---
             
             // Data statis/umum
             const Tgl_Cetak = new Date().toLocaleDateString('id-ID', {day: '2-digit', month: '2-digit', year: 'numeric'}); 
@@ -325,7 +334,7 @@
 
                     <div class="text-center text-bold">Rincian Biaya (Rp)</div>
                     <table class="receipt-table">
-                        <tr><td class="td-label">Iuran 2.000/m³</td><td class="td-colon">:</td><td class="td-value td-value-right">Rp ${Tarif_Ixuan}</td></tr>
+                        <tr><td class="td-label">Iuran 2.000/m³</td><td class="td-colon">:</td><td class="td-value td-value-right">Rp ${Tarif_Iuran_Baru_Formatted}</td></tr>
                         <tr><td class="td-label">Pokok Beban</td><td class="td-colon">:</td><td class="td-value td-value-right">Rp ${Pokok_Beban}</td></tr>
                     </table>
                     
