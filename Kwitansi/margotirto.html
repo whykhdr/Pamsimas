@@ -3,6 +3,7 @@
 <head>
     <title>Daftar Kuitansi PAMSIMAS</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
@@ -247,6 +248,14 @@
             return cell.f || cell.v || 'N/A';
         };
 
+        // (BARU) Fungsi untuk mengambil nilai angka mentah (raw number)
+        const getRawNum = (row, index) => {
+            const cell = row[index];
+            // Pastikan cell.v ada dan bertipe number
+            if (!cell || typeof cell.v !== 'number') return 0;
+            return cell.v;
+        };
+
         // =========================================================
         // === FUNGSI DOWNLOAD GAMBAR (MENGGUNAKAN html2canvas) ====
         // =========================================================
@@ -284,9 +293,26 @@
             const Nama_Pelanggan = getCellVal(row, 1); 
             const Stand_Awal = getCellVal(row, 2); 
             const Stand_Akhir = getCellVal(row, 3); 
+            
+            // (PERUBAHAN) Ambil nilai terformat untuk tampilan
             const Jumlah_Pemakaian = getCellVal(row, 4); 
+            
+            // (PERUBAHAN) Ambil nilai angka mentah untuk kalkulasi
+            const raw_Jumlah_Pemakaian = getRawNum(row, 4);
+
             const Pokok_Beban = getCellVal(row, 5); 
-            const Tarif_Ixuan = getCellVal(row, 6); 
+            
+            // (PERUBAHAN) Hapus pengambilan 'Tarif_Ixuan' dari sel (kolom G, index 6)
+            // const Tarif_Ixuan_Lama = getCellVal(row, 6); 
+            
+            // (PERUBAHAN) Hitung 'Tarif_Ixuan' baru berdasarkan rumus
+            const calculated_Tarif_Ixuan = raw_Jumlah_Pemakaian * 2000;
+
+            // (PERUBAHAN) Format angka hasil kalkulasi ke format mata uang (tanpa desimal)
+            const Tarif_Ixuan = new Intl.NumberFormat('id-ID', { 
+                maximumFractionDigits: 0 
+            }).format(calculated_Tarif_Ixuan);
+            
             const Jumlah_Bayar = getCellVal(row, 8); 
             const Alamat_Rumah = getCellVal(row, 9); 
             
@@ -387,7 +413,7 @@
             // 3. Ambil HTML kuitansi (TANPA tombol download)
             const receiptHtml = getReceiptHtml(rowIndex);
             
-            // 4. Masukkan ke DOM (di area yang tersembunyi tapi di-render)
+            // 4. Masukkan ke DOM (di area yang aktif tapi mungkin tidak terlihat)
             document.getElementById('receipt-output').innerHTML = receiptHtml;
             
             // 5. Ambil elemen .container yang baru di-render
@@ -428,7 +454,9 @@
 
             // PENTING: Pastikan #receipt-output aktif di DOM (meski tidak terlihat oleh user)
             // agar html2canvas bisa menemukan elemen .container
-            document.getElementById('list-output').style.display = 'none';
+            
+            // document.getElementById('list-output').style.display = 'none'; // <-- (PERBAIKAN) Baris ini DIHAPUS agar status tetap terlihat
+            
             document.getElementById('receipt-output').style.display = 'block';
             document.querySelector('.receipt-view-controls #back-btn').style.display = 'none'; // Sembunyikan tombol kembali
 
