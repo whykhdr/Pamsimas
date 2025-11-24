@@ -295,11 +295,11 @@
             const iuranCalculated = pemakaianAngka * 2000;
             const Tarif_Iuran_Baru_Formatted = new Intl.NumberFormat('id-ID').format(iuranCalculated);
             
-            // --- (PERUBAHAN 2) Periode Bulan Otomatis ---
+            // --- (PERUBAHAN 2) Periode Bulan Otomatis (TANPA TAHUN) ---
             // Mengambil tanggal hari ini
             const dateObj = new Date(); 
-            // Mengambil Nama Bulan dan Tahun (misal: NOVEMBER 2025)
-            const Periode_Bulan = dateObj.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' }).toUpperCase();
+            // Mengambil Nama Bulan saja (misal: NOVEMBER)
+            const Periode_Bulan = dateObj.toLocaleDateString('id-ID', { month: 'long' }).toUpperCase();
             
             // Tanggal Cetak
             const Tgl_Cetak = dateObj.toLocaleDateString('id-ID', {day: '2-digit', month: '2-digit', year: 'numeric'}); 
@@ -452,4 +452,150 @@
                 }
                 
                 const namaPelanggan = getCellVal(masterData[i+1].c, 1);
-                statusEl.innerHTML = `Mengunduh ${i + 1} / ${endIndex} : <b>${namaPelanggan}</b>...
+                statusEl.innerHTML = `Mengunduh ${i + 1} / ${endIndex} : <b>${namaPelanggan}</b>...`;
+                
+                try {
+                    await downloadSingleReceiptByIndex(i);
+                } catch (err) {
+                    console.error(`Gagal mengunduh kuitansi index ${i}:`, err);
+                    statusEl.innerHTML = `<span style="color: red;">Gagal pada kuitansi ${i + 1}.</span>`;
+                }
+            }
+
+            // Selesai
+            statusEl.innerHTML = `Selesai mengunduh ${startIndex + 1} - ${endIndex}.`;
+            
+            // Aktifkan kembali SEMUA tombol batch
+            document.querySelectorAll('.batch-controls button').forEach(btn => btn.disabled = false);
+
+            // Kembalikan ke tampilan daftar
+            showList();
+            
+            // Sembunyikan status setelah beberapa detik
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 4000);
+        }
+
+
+        /**
+         * (BARU) Fungsi untuk menangani download rentang kustom
+         */
+        function handleBatchRangeDownload() {
+            const startInput = document.getElementById('batch-start');
+            const endInput = document.getElementById('batch-end');
+            const statusEl = document.getElementById('batch-status');
+            
+            const startNum = parseInt(startInput.value, 10);
+            const endNum = parseInt(endInput.value, 10);
+            const totalItems = masterData.length - 1;
+
+            // Validasi Input
+            let errorMsg = "";
+            if (isNaN(startNum) || isNaN(endNum)) {
+                errorMsg = "Harap isi 'Dari' dan 'Sampai'.";
+            } else if (startNum < 1) {
+                errorMsg = "Nomor 'Dari' harus minimal 1.";
+            } else if (endNum < startNum) {
+                errorMsg = "Nomor 'Sampai' harus lebih besar atau sama dengan 'Dari'.";
+            } else if (endNum > totalItems) {
+                errorMsg = `Nomor 'Sampai' tidak boleh melebihi ${totalItems}.`;
+            }
+
+            if (errorMsg) {
+                statusEl.innerHTML = `<span style="color: red;">${errorMsg}</span>`;
+                statusEl.style.display = 'block';
+                
+                // Sembunyikan pesan error setelah beberapa detik
+                setTimeout(() => {
+                    if (statusEl.innerHTML.includes(errorMsg)) {
+                         statusEl.style.display = 'none';
+                    }
+                }, 4000);
+                return;
+            }
+
+            // Konversi dari Nomor Urut (1-based) ke Index (0-based)
+            // Contoh: User input 1 sampai 10 -> startIndex 0, endIndex 10
+            const startIndex = startNum - 1;
+            const endIndex = endNum; 
+
+            // Panggil fungsi batchDownload
+            batchDownload(startIndex, endIndex);
+        }
+
+
+        // --- (DIMODIFIKASI) FUNGSI TAMPIL DAFTAR (87 TRANSAKSI) ---
+        function renderList(data) {
+            masterData = data.table.rows;
+            
+            // (BARU) Buat tombol batch download secara dinamis
+            let batchHtml = '<div class="batch-controls">';
+            batchHtml += '<h3>Unduh Kuitansi</h3>';
+            batchHtml += '<div id="batch-status"></div>';
+            
+            const totalItems = masterData.length - 1; // -1 untuk header
+            
+            // (BARU) Tambahkan tombol "Unduh Semua"
+            batchHtml += `<button id="batch-btn-all" onclick="batchDownload(0, ${totalItems})">Unduh Semua (${totalItems})</button>`;
+            
+            // (DIUBAH) Hapus loop "per 10" dan ganti dengan input rentang
+            batchHtml += `<div class="range-controls">`;
+            batchHtml += `<h4>...atau unduh rentang tertentu</h4>`;
+            batchHtml += `<div>`;
+            batchHtml += `<input type="number" id="batch-start" placeholder="Dari (No.)" min="1" max="${totalItems}">`;
+            batchHtml += `<input type="number" id="batch-end" placeholder="Sampai (No.)" min="1" max="${totalItems}">`;
+            batchHtml += `<button id="batch-btn-range" onclick="handleBatchRangeDownload()">Unduh Rentang</button>`;
+            batchHtml += `</div></div>`;
+            
+            batchHtml += '</div>'; // Penutup .batch-controls
+
+            // Gabungkan tombol batch dengan judul dan daftar list
+            let listHtml = '<h2>&#x1F4CB; Daftar Transaksi Pembayaran</h2>' + batchHtml + '<ol>';
+
+            for (let i = 1; i < masterData.length; i++) {
+                const row = masterData[i].c;
+                const Nama_Pelanggan = getCellVal(row, 1);
+                const Jumlah_Bayar = getCellVal(row, 8); 
+                const Alamat_Rumah = getCellVal(row, 9); // <-- PERUBAHAN: Ambil alamat
+
+                if (Nama_Pelanggan && Nama_Pelanggan !== 'N/A') {
+                    listHtml += `
+                        <li>
+                            <div class="list-info">
+                                <span>${i}. 👤 ${Nama_Pelanggan}</span>
+                                <!-- PERUBAHAN: Tampilkan Alamat dan Total -->
+                                <span>📍 ${Alamat_Rumah} | 💰 Total: <strong>Rp ${Jumlah_Bayar}</strong></span>
+                            </div>
+                            <button onclick="renderReceipt(${i - 1})">&#x1F4F7; Lihat & Download</button>
+                        </li>
+                    `;
+                }
+            }
+
+            listHtml += '</ol>';
+            document.getElementById('list-output').innerHTML = listHtml;
+            document.querySelector('.receipt-view-controls #back-btn').style.display = 'none';
+        }
+
+        function showList() {
+            document.getElementById('list-output').style.display = 'block';
+            document.getElementById('receipt-output').style.display = 'none';
+            document.querySelector('.receipt-view-controls #back-btn').style.display = 'none';
+        }
+
+        // --- MEMUAT DATA AWAL ---
+        fetch(DATA_URL)
+            .then(res => res.text())
+            .then(text => {
+                const jsonString = text.substring(47).slice(0, -2);
+                const data = JSON.parse(jsonString);
+                renderList(data);
+            })
+            .catch(error => {
+                document.getElementById('list-output').innerHTML = '<div style="color: red; text-align: center;">&#x26A0; Gagal memuat data. Periksa ID Spreadsheet dan izin publikasi!</div>';
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+</html>
