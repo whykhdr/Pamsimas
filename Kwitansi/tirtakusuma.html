@@ -9,13 +9,11 @@
     <style>
         /* ==================== A. PENGATURAN CETAK (THERMAL 58mm) ==================== */
         @media print {
-            /* Pastikan tidak ada border/shadow saat dicetak */
             .container { border: none !important; box-shadow: none !important; }
-            /* Sembunyikan semua tombol saat pengguna memaksa cetak (Ctrl+P) */
-            .print-list, #back-btn, button, .batch-controls { 
+            /* Sembunyikan panel kontrol saat dicetak */
+            .print-list, #back-btn, button, .batch-controls, .config-panel { 
                 display: none !important; 
             } 
-            /* Styling Cetak lainnya tetap sama */
             body { width: 58mm; font-family: 'Courier New', monospace, sans-serif; font-size: 9pt; margin: 0; padding: 0; line-height: 1.2; }
             .container { padding: 0 2mm; width: 58mm; }
             .receipt-view { display: block !important; }
@@ -24,11 +22,10 @@
         /* ==================== B. PENGATURAN LAYAR (BROWSER) ==================== */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 20px; background: #f4f7f9; /* Latar belakang lebih lembut */
+            margin: 20px; background: #f4f7f9; 
             text-align: center; 
         }
         
-        /* Kontainer Kuitansi (Preview) - Font Monospace 58mm */
         .receipt-view { display: inline-block; margin: 0 auto; }
         .container { 
             width: 58mm; 
@@ -44,7 +41,6 @@
             box-sizing: border-box; 
         }
         
-        /* ==================== STYLING BARU HALAMAN UTAMA (DAFTAR) ==================== */
         .print-list { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             max-width: 800px; 
@@ -52,174 +48,95 @@
             padding: 20px; 
             background: white; 
             border-radius: 12px; 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Shadow yang lebih dalam */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
             text-align: left; 
         }
         .print-list h2 { 
-            color: #007bff; /* Biru Primer */
-            border-bottom: 2px solid #e0e0e0; 
-            padding-bottom: 10px; 
-            margin-bottom: 20px; 
+            color: #007bff; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; margin-bottom: 20px; 
         }
         .print-list ol { 
-            list-style: none; 
-            padding: 0; 
-            display: grid;
-            gap: 10px; /* Jarak antar kartu */
+            list-style: none; padding: 0; display: grid; gap: 10px; 
         }
         .print-list li {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px; 
-            background: #f8f9fa; /* Warna latar belakang kartu */
-            border-radius: 8px; /* Sudut membulat */
-            border: 1px solid #dee2e6;
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;
             transition: all 0.2s ease-in-out;
         }
         .print-list li:hover {
-            background: #e9ecef; /* Efek hover */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
+            background: #e9ecef; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transform: translateY(-2px);
         }
-        .list-info {
-            display: flex;
-            flex-direction: column;
-            font-size: 16px;
-        }
-        .list-info span:first-child {
-            font-weight: bold;
-            color: #343a40;
-            margin-bottom: 4px;
-        }
-        .list-info span:last-child {
-            color: #6c757d;
-            font-size: 14px;
-        }
-
+        .list-info { display: flex; flex-direction: column; font-size: 16px; }
+        .list-info span:first-child { font-weight: bold; color: #343a40; margin-bottom: 4px; }
+        .list-info span:last-child { color: #6c757d; font-size: 14px; }
         
-        /* Styling Tombol */
+        /* --- PANEL KONFIGURASI MANUAL --- */
+        .config-panel {
+            background-color: #fff3cd; /* Warna kuning lembut agar terlihat */
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .config-panel label {
+            font-weight: bold;
+            color: #856404;
+            font-size: 15px;
+        }
+        .config-panel input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .config-panel input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
         button {
-            padding: 10px 18px; 
-            border: none; 
-            border-radius: 50px; /* Tombol bulat */
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: background-color 0.3s, box-shadow 0.3s;
-            background-color: #28a745; /* Hijau yang lebih cerah */
-            color: white; 
-            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            white-space: nowrap;
+            padding: 10px 18px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; 
+            transition: background-color 0.3s; background-color: #28a745; color: white; 
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); white-space: nowrap;
         }
-        button:hover { 
-            background-color: #218838; 
-            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
-        }
-        #back-btn { 
-            background-color: #6c757d; 
-            box-shadow: none;
-            margin-top: 10px; 
-            border-radius: 8px; 
-        }
-        #back-btn:hover { 
-            background-color: #5a6268; 
-        }
+        button:hover { background-color: #218838; }
+        #back-btn { background-color: #6c757d; box-shadow: none; margin-top: 10px; border-radius: 8px; }
+        #back-btn:hover { background-color: #5a6268; }
 
-
-        /* ==================== C. STYLING KUITANSI (DETAIL) ==================== */
         .text-center { text-align: center; }
         .text-bold { font-weight: bold; }
         .text-underline { text-decoration: underline; }
-        
-        /* PENTING: Pengaturan Lebar Kolom untuk Menyelaraskan Titik Dua */
         .receipt-table { width: 100%; border-collapse: collapse; }
         .receipt-table td { padding: 0; vertical-align: top; white-space: nowrap; } 
-        
-        /* Penyesuaian Lebar Kolom */
         .td-label { width: 40%; text-align: left; } 
         .td-colon { width: 3%; text-align: center; } 
         .td-value { width: 57%; text-align: left; font-weight: bold; } 
-        
         .td-value-center { text-align: center !important; } 
         .td-value-right { text-align: right !important; } 
         
-        /* ==================== D. STYLING BATCH DOWNLOAD (BARU) ==================== */
         .batch-controls {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: #f0f4f8;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
+            margin-bottom: 25px; padding: 15px; background: #f0f4f8; border-radius: 8px; border: 1px solid #dee2e6;
         }
-        .batch-controls h3 {
-            margin-top: 0;
-            color: #343a40;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        .batch-controls h3 { margin-top: 0; color: #343a40; }
         .batch-controls button {
-            background-color: #007bff; /* Biru */
-            margin: 5px;
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-            font-size: 13px;
-            padding: 8px 15px;
+            background-color: #007bff; margin: 5px; box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+            font-size: 13px; padding: 8px 15px;
         }
-        .batch-controls button:hover {
-            background-color: #0056b3;
-            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
-        }
-        .batch-controls button:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-            box-shadow: none;
-            opacity: 0.7;
-        }
-        /* (BARU) Style untuk tombol "Unduh Semua" */
-        .batch-controls button#batch-btn-all {
-            background-color: #17a2b8; /* Biru Info */
-            box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3);
-        }
-        .batch-controls button#batch-btn-all:hover {
-            background-color: #138496;
-            box-shadow: 0 6px 12px rgba(23, 162, 184, 0.4);
-        }
-        #batch-status {
-            display: none; 
-            color: #007bff; 
-            margin-top: 10px; 
-            font-weight: bold;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 15px;
-        }
-        /* (BARU) Style untuk input rentang kustom */
-        .batch-controls input[type="number"] {
-            width: 100px;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 14px;
-        }
-        .batch-controls .range-controls {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #dee2e6;
-        }
-        .batch-controls .range-controls h4 {
-            margin: 0 0 10px 0;
-            color: #6c757d;
-            font-weight: normal;
-        }
-        .batch-controls .range-controls div {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .batch-controls .range-controls button {
-             margin: 0;
-             font-size: 13px;
-             padding: 8px 15px;
-        }
+        .batch-controls button:hover { background-color: #0056b3; }
+        .batch-controls button:disabled { background-color: #6c757d; cursor: not-allowed; opacity: 0.7; }
+        .batch-controls button#batch-btn-all { background-color: #17a2b8; }
+        #batch-status { display: none; color: #007bff; margin-top: 10px; font-weight: bold; font-size: 15px; }
+        .batch-controls input[type="number"] { width: 100px; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+        .batch-controls .range-controls { margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6; }
+        .batch-controls .range-controls h4 { margin: 0 0 10px 0; color: #6c757d; font-weight: normal; }
+        .batch-controls .range-controls div { display: flex; gap: 10px; align-items: center; }
+        .batch-controls .range-controls button { margin: 0; font-size: 13px; padding: 8px 15px; }
     </style>
 </head>
 <body>
@@ -230,341 +147,215 @@
         <div class="receipt-view-controls" style="max-width: 800px; margin: 0 auto; text-align: left;">
              <button id="back-btn" onclick="showList()" style="display: none;">&#x2190; Kembali ke Daftar Pelanggan</button>
         </div>
-        <div id="receipt-output" class="receipt-view">
-            <!-- Kuitansi tunggal akan dirender di sini -->
-        </div>
+        <div id="receipt-output" class="receipt-view"></div>
     </div>
 
     <script>
-        // PASTIKAN INI ADALAH URL JSON DARI SPREADSHEET HORIZONTAL ANDA
         const DATA_URL = 'https://docs.google.com/spreadsheets/d/1HHn6ZnqfLrEVNVktxIchcwdmBMmL-WyEnBBJP5piABg/gviz/tq?tqx=out:json&gid=651467196';
         let masterData = [];
 
-        // Fungsi untuk mengambil nilai dari JSON (index = posisi kolom)
         const getCellVal = (row, index) => {
+            if (!row) return 'N/A';
             const cell = row[index];
             if (!cell) return 'N/A';
             return cell.f || cell.v || 'N/A';
         };
 
-        // =========================================================
-        // === FUNGSI DOWNLOAD GAMBAR (MENGGUNAKAN html2canvas) ====
-        // =========================================================
+        // Fungsi helper untuk mengambil nilai Input Manual
+        function getManualPeriode() {
+            const input = document.getElementById('periode-input');
+            if (input && input.value.trim() !== "") {
+                return input.value.trim().toUpperCase();
+            }
+            return "SEPTEMBER"; // Default fallback
+        }
+
         function downloadReceiptAsImage(namaPelanggan) {
             const container = document.querySelector('#receipt-output .container');
             const fileName = `Kuitansi_${namaPelanggan.replace(/\s/g, '_')}.png`;
-
-            // Scale ditingkatkan untuk kualitas gambar yang lebih baik 
-            html2canvas(container, {
-                scale: 3, 
-                useCORS: true,
-                backgroundColor: null 
-            }).then(canvas => {
+            html2canvas(container, { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
                 const image = canvas.toDataURL('image/png');
-                
-                // Membuat elemen link tersembunyi untuk memicu download
                 const link = document.createElement('a');
-                link.href = image;
-                link.download = fileName;
-                
-                // Memicu klik
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                link.href = image; link.download = fileName;
+                document.body.appendChild(link); link.click(); document.body.removeChild(link);
             });
         }
 
-        // --- (BARU) FUNGSI UNTUK MENGHASILKAN HTML KUITANSI ---
-        // Fungsi ini HANYA mengembalikan string HTML dari kuitansi
         function getReceiptHtml(rowIndex) {
             const row = masterData[rowIndex + 1].c; 
             
-            // --- EKSTRAKSI DATA ---
             const No_Pelanggan = getCellVal(row, 0); 
             const Nama_Pelanggan = getCellVal(row, 1); 
             const Stand_Awal = getCellVal(row, 2); 
             const Stand_Akhir = getCellVal(row, 3); 
-            const Jumlah_Pemakaian = getCellVal(row, 4); // Ini tetap string, dipakai di Rincian Pemakaian
+            const Jumlah_Pemakaian = getCellVal(row, 4); 
             const Pokok_Beban = getCellVal(row, 5); 
-            // const Tarif_Ixuan = getCellVal(row, 6); // Tidak dipakai, akan dikalkulasi
+            
+            // --- MENGAMBIL PERIODE DARI KOTAK INPUT MANUAL ---
+            const Periode_Bulan = getManualPeriode();
+
             const Jumlah_Bayar = getCellVal(row, 8); 
             const Alamat_Rumah = getCellVal(row, 9); 
             
-            // --- (PERUBAHAN 1) Kalkulasi Iuran dinamis (2000 * pemakaian) ---
             const pemakaianAngka = parseFloat(Jumlah_Pemakaian.replace(',', '.')) || 0;
             const iuranCalculated = pemakaianAngka * 2000;
             const Tarif_Iuran_Baru_Formatted = new Intl.NumberFormat('id-ID').format(iuranCalculated);
             
-            // --- (PERUBAHAN 2) Periode Bulan Otomatis (TANPA TAHUN) ---
-            // Mengambil tanggal hari ini
             const dateObj = new Date(); 
-            // Mengambil Nama Bulan saja (misal: NOVEMBER)
-            const Periode_Bulan = dateObj.toLocaleDateString('id-ID', { month: 'long' }).toUpperCase();
-            
-            // Tanggal Cetak
             const Tgl_Cetak = dateObj.toLocaleDateString('id-ID', {day: '2-digit', month: '2-digit', year: 'numeric'}); 
-            
             const Collector = 'Suciani'; 
 
-            // --- MERENDER HTML KUITANSI ---
             const htmlContainer = `
                 <div class="container">
                     <div class="text-center text-bold">PAMSIMAS TIRTA KUSUMA</div>
                     <div class="text-center text-bold">DUSUN KUAMANG JAYA</div>
-                    
                     <div class="text-center" style="margin: 2px 0;">---------------------------</div>
-
                     <div style="text-align: right; font-size: 7pt; margin-bottom: 5px;">Tgl. Cetak: ${Tgl_Cetak}</div>
-
                     <table class="receipt-table">
                         <tr><td class="td-label">Periode Bulan</td><td class="td-colon">:</td><td class="td-value">${Periode_Bulan}</td></tr>
                         <tr><td class="td-label">Nama Pelanggan</td><td class="td-colon">:</td><td class="td-value">${Nama_Pelanggan}</td></tr>
                         <tr><td class="td-label">No Pelanggan</td><td class="td-colon">:</td><td class="td-value">${No_Pelanggan}</td></tr>
                         <tr><td class="td-label">Alamat Rumah</td><td class="td-colon">:</td><td class="td-value">${Alamat_Rumah}</td></tr>
                     </table>
-
                     <div class="text-center" style="margin: 2px 0;">---------------------------</div>
-
                     <div class="text-center text-bold">Rincian Pemakaian Air (M³)</div>
                     <table class="receipt-table">
                         <tr><td class="td-label">Stand Awal</td><td class="td-colon">:</td><td class="td-value td-value-right">${Stand_Awal}</td></tr>
                         <tr><td class="td-label">Stand Akhir</td><td class="td-colon">:</td><td class="td-value td-value-right">${Stand_Akhir}</td></tr>
                         <tr><td class="td-label">Jumlah Pemakaian</td><td class="td-colon">:</td><td class="td-value td-value-right">${Jumlah_Pemakaian}</td></tr>
                     </table>
-                    
                     <div class="text-center" style="margin: 2px 0;">---------------------------</div>
-
                     <div class="text-center text-bold">Rincian Biaya (Rp)</div>
                     <table class="receipt-table">
                         <tr><td class="td-label">Iuran 2.000/m³</td><td class="td-colon">:</td><td class="td-value td-value-right">Rp ${Tarif_Iuran_Baru_Formatted}</td></tr>
                         <tr><td class="td-label">Pokok Beban</td><td class="td-colon">:</td><td class="td-value td-value-right">Rp ${Pokok_Beban}</td></tr>
                     </table>
-                    
                     <div class="text-center" style="margin: 2px 0;">============================</div>
-                    
                     <div class="text-center text-bold text-underline">JUMLAH BAYAR</div>
                     <div class="text-center text-bold" style="font-size: 11pt;">Rp ${Jumlah_Bayar}</div>
-                    
                     <div class="text-center" style="margin: 2px 0;">---------------------------</div>
-                    
                     <div class="text-center text-bold">TERIMA KASIH</div>
                     <div class="text-center" style="font-size: 7pt;">Collector: ${Collector}</div>
                 </div>
             `;
-            
             return htmlContainer;
         }
 
-
-        // --- (DIMODIFIKASI) FUNGSI TAMPIL KUITANSI TUNGGAL (PREVIEW + TOMBOL DOWNLOAD) ---
         function renderReceipt(rowIndex) {
-            // Ambil nama pelanggan untuk tombol
             const row = masterData[rowIndex + 1].c;
             const Nama_Pelanggan = getCellVal(row, 1);
-
-            // 1. Ambil HTML kuitansi dasar
             let receiptHtml = getReceiptHtml(rowIndex);
-            
-            // 2. Tambahkan tombol download tunggal
             receiptHtml += `<button onclick="downloadReceiptAsImage('${Nama_Pelanggan}')" style="margin-top: 10px; width: 58mm;">Download Gambar (PNG)</button>`;
-            
-            // 3. Render ke DOM
             document.getElementById('receipt-output').innerHTML = receiptHtml;
             document.getElementById('list-output').style.display = 'none';
             document.getElementById('receipt-output').style.display = 'block';
-            
-            // Tampilkan tombol kembali
             document.querySelector('.receipt-view-controls #back-btn').style.display = 'block';
         }
 
-        // =========================================================
-        // === (BARU) FUNGSI DOWNLOAD BATCH ========================
-        // =========================================================
-
-        /**
-         * (BARU) Fungsi helper untuk men-download satu kuitansi berdasarkan index data.
-         * Ini adalah versi "headless" (tanpa UI) dari renderReceipt + download.
-         * @returns {Promise<void>}
-         */
         async function downloadSingleReceiptByIndex(rowIndex) {
-            // 1. Ambil data (masterData[0] adalah header, jadi +1)
             const row = masterData[rowIndex + 1].c;
-            if (!row) return; // Data tidak ada
-
-            // 2. Ekstrak nama untuk file
+            if (!row) return;
             const Nama_Pelanggan = getCellVal(row, 1);
             const fileName = `Kuitansi_${(rowIndex + 1)}_${Nama_Pelanggan.replace(/\s/g, '_')}.png`;
-
-            // 3. Ambil HTML kuitansi (TANPA tombol download)
             const receiptHtml = getReceiptHtml(rowIndex);
-            
-            // 4. Masukkan ke DOM (di area yang tersembunyi tapi di-render)
             document.getElementById('receipt-output').innerHTML = receiptHtml;
-            
-            // 5. Ambil elemen .container yang baru di-render
             const container = document.querySelector('#receipt-output .container');
-            if (!container) return; // Gagal render
-
-            // 6. Gunakan html2canvas untuk mengambil gambar (await)
-            const canvas = await html2canvas(container, {
-                scale: 3,
-                useCORS: true,
-                backgroundColor: null
-            });
-
-            // 7. Buat link download
+            if (!container) return;
+            const canvas = await html2canvas(container, { scale: 3, useCORS: true, backgroundColor: null });
             const image = canvas.toDataURL('image/png');
             const link = document.createElement('a');
-            link.href = image;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // 8. Beri jeda singkat agar browser tidak memblokir multiple download
+            link.href = image; link.download = fileName;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
             await new Promise(resolve => setTimeout(resolve, 300));
         }
 
-        /**
-         * (BARU) Fungsi utama untuk batch download
-         */
         async function batchDownload(startIndex, endIndex) {
             const statusEl = document.getElementById('batch-status');
-            
-            // Nonaktifkan SEMUA tombol batch
             document.querySelectorAll('.batch-controls button').forEach(btn => btn.disabled = true);
-            
             statusEl.innerHTML = `Mulai mengunduh kuitansi ${startIndex + 1} - ${endIndex}...`;
             statusEl.style.display = 'block';
-
-            // PENTING: Pastikan #receipt-output aktif di DOM (meski tidak terlihat oleh user)
-            // agar html2canvas bisa menemukan elemen .container
             document.getElementById('list-output').style.display = 'none';
             document.getElementById('receipt-output').style.display = 'block';
-            document.querySelector('.receipt-view-controls #back-btn').style.display = 'none'; // Sembunyikan tombol kembali
-
-
+            document.querySelector('.receipt-view-controls #back-btn').style.display = 'none';
             for (let i = startIndex; i < endIndex; i++) {
-                // Pastikan data ada
-                if (!masterData[i + 1]) {
-                    console.warn(`Data index ${i} tidak ditemukan, berhenti.`);
-                    break;
-                }
-                
+                if (!masterData[i + 1]) break;
                 const namaPelanggan = getCellVal(masterData[i+1].c, 1);
                 statusEl.innerHTML = `Mengunduh ${i + 1} / ${endIndex} : <b>${namaPelanggan}</b>...`;
-                
-                try {
-                    await downloadSingleReceiptByIndex(i);
-                } catch (err) {
-                    console.error(`Gagal mengunduh kuitansi index ${i}:`, err);
-                    statusEl.innerHTML = `<span style="color: red;">Gagal pada kuitansi ${i + 1}.</span>`;
-                }
+                try { await downloadSingleReceiptByIndex(i); } catch (err) { console.error(err); }
             }
-
-            // Selesai
             statusEl.innerHTML = `Selesai mengunduh ${startIndex + 1} - ${endIndex}.`;
-            
-            // Aktifkan kembali SEMUA tombol batch
             document.querySelectorAll('.batch-controls button').forEach(btn => btn.disabled = false);
-
-            // Kembalikan ke tampilan daftar
             showList();
-            
-            // Sembunyikan status setelah beberapa detik
-            setTimeout(() => {
-                statusEl.style.display = 'none';
-            }, 4000);
+            setTimeout(() => { statusEl.style.display = 'none'; }, 4000);
         }
 
-
-        /**
-         * (BARU) Fungsi untuk menangani download rentang kustom
-         */
         function handleBatchRangeDownload() {
             const startInput = document.getElementById('batch-start');
             const endInput = document.getElementById('batch-end');
             const statusEl = document.getElementById('batch-status');
-            
             const startNum = parseInt(startInput.value, 10);
             const endNum = parseInt(endInput.value, 10);
             const totalItems = masterData.length - 1;
-
-            // Validasi Input
             let errorMsg = "";
-            if (isNaN(startNum) || isNaN(endNum)) {
-                errorMsg = "Harap isi 'Dari' dan 'Sampai'.";
-            } else if (startNum < 1) {
-                errorMsg = "Nomor 'Dari' harus minimal 1.";
-            } else if (endNum < startNum) {
-                errorMsg = "Nomor 'Sampai' harus lebih besar atau sama dengan 'Dari'.";
-            } else if (endNum > totalItems) {
-                errorMsg = `Nomor 'Sampai' tidak boleh melebihi ${totalItems}.`;
-            }
-
+            if (isNaN(startNum) || isNaN(endNum)) errorMsg = "Harap isi 'Dari' dan 'Sampai'.";
+            else if (startNum < 1) errorMsg = "Nomor 'Dari' harus minimal 1.";
+            else if (endNum < startNum) errorMsg = "Nomor 'Sampai' harus >= 'Dari'.";
+            else if (endNum > totalItems) errorMsg = `Maksimal ${totalItems}.`;
             if (errorMsg) {
                 statusEl.innerHTML = `<span style="color: red;">${errorMsg}</span>`;
                 statusEl.style.display = 'block';
-                
-                // Sembunyikan pesan error setelah beberapa detik
-                setTimeout(() => {
-                    if (statusEl.innerHTML.includes(errorMsg)) {
-                         statusEl.style.display = 'none';
-                    }
-                }, 4000);
+                setTimeout(() => { statusEl.style.display = 'none'; }, 4000);
                 return;
             }
-
-            // Konversi dari Nomor Urut (1-based) ke Index (0-based)
-            // Contoh: User input 1 sampai 10 -> startIndex 0, endIndex 10
-            const startIndex = startNum - 1;
-            const endIndex = endNum; 
-
-            // Panggil fungsi batchDownload
-            batchDownload(startIndex, endIndex);
+            batchDownload(startNum - 1, endNum);
         }
 
-
-        // --- (DIMODIFIKASI) FUNGSI TAMPIL DAFTAR (87 TRANSAKSI) ---
         function renderList(data) {
             masterData = data.table.rows;
             
-            // (BARU) Buat tombol batch download secara dinamis
+            // --- UI CONFIG PANEL ---
+            // Secara otomatis mengisi dengan Bulan sekarang (Contoh: NOVEMBER)
+            const dateNow = new Date();
+            // Hapus 'year: numeric' agar hanya muncul bulan
+            const defaultPeriode = dateNow.toLocaleDateString('id-ID', { month: 'long' }).toUpperCase();
+
+            let configHtml = `
+                <div class="config-panel">
+                    <label for="periode-input">📝 <b>Periode Bulan:</b></label>
+                    <input type="text" id="periode-input" value="${defaultPeriode}" placeholder="Contoh: SEPTEMBER">
+                    <div style="font-size: 12px; color: #856404; flex-basis: 100%; margin-top: 5px;">
+                        *Ubah teks di atas jika salah, lalu klik tombol "Unduh" atau "Lihat".
+                    </div>
+                </div>
+            `;
+
             let batchHtml = '<div class="batch-controls">';
             batchHtml += '<h3>Unduh Kuitansi</h3>';
             batchHtml += '<div id="batch-status"></div>';
-            
-            const totalItems = masterData.length - 1; // -1 untuk header
-            
-            // (BARU) Tambahkan tombol "Unduh Semua"
+            const totalItems = masterData.length - 1; 
             batchHtml += `<button id="batch-btn-all" onclick="batchDownload(0, ${totalItems})">Unduh Semua (${totalItems})</button>`;
-            
-            // (DIUBAH) Hapus loop "per 10" dan ganti dengan input rentang
             batchHtml += `<div class="range-controls">`;
             batchHtml += `<h4>...atau unduh rentang tertentu</h4>`;
             batchHtml += `<div>`;
-            batchHtml += `<input type="number" id="batch-start" placeholder="Dari (No.)" min="1" max="${totalItems}">`;
-            batchHtml += `<input type="number" id="batch-end" placeholder="Sampai (No.)" min="1" max="${totalItems}">`;
+            batchHtml += `<input type="number" id="batch-start" placeholder="Dari" min="1" max="${totalItems}">`;
+            batchHtml += `<input type="number" id="batch-end" placeholder="Sampai" min="1" max="${totalItems}">`;
             batchHtml += `<button id="batch-btn-range" onclick="handleBatchRangeDownload()">Unduh Rentang</button>`;
-            batchHtml += `</div></div>`;
+            batchHtml += `</div></div></div>`;
             
-            batchHtml += '</div>'; // Penutup .batch-controls
-
-            // Gabungkan tombol batch dengan judul dan daftar list
-            let listHtml = '<h2>&#x1F4CB; Daftar Transaksi Pembayaran</h2>' + batchHtml + '<ol>';
-
+            let listHtml = '<h2>&#x1F4CB; Daftar Transaksi Pembayaran</h2>';
+            listHtml += configHtml; // Tambahkan Panel Config di atas
+            listHtml += batchHtml + '<ol>';
+            
             for (let i = 1; i < masterData.length; i++) {
                 const row = masterData[i].c;
                 const Nama_Pelanggan = getCellVal(row, 1);
                 const Jumlah_Bayar = getCellVal(row, 8); 
-                const Alamat_Rumah = getCellVal(row, 9); // <-- PERUBAHAN: Ambil alamat
-
+                const Alamat_Rumah = getCellVal(row, 9); 
                 if (Nama_Pelanggan && Nama_Pelanggan !== 'N/A') {
                     listHtml += `
                         <li>
                             <div class="list-info">
                                 <span>${i}. 👤 ${Nama_Pelanggan}</span>
-                                <!-- PERUBAHAN: Tampilkan Alamat dan Total -->
                                 <span>📍 ${Alamat_Rumah} | 💰 Total: <strong>Rp ${Jumlah_Bayar}</strong></span>
                             </div>
                             <button onclick="renderReceipt(${i - 1})">&#x1F4F7; Lihat & Download</button>
@@ -572,7 +363,6 @@
                     `;
                 }
             }
-
             listHtml += '</ol>';
             document.getElementById('list-output').innerHTML = listHtml;
             document.querySelector('.receipt-view-controls #back-btn').style.display = 'none';
@@ -584,7 +374,6 @@
             document.querySelector('.receipt-view-controls #back-btn').style.display = 'none';
         }
 
-        // --- MEMUAT DATA AWAL ---
         fetch(DATA_URL)
             .then(res => res.text())
             .then(text => {
